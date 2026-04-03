@@ -163,20 +163,74 @@ Sistem informasi inventory berbasis web dengan implementasi metode FIFO untuk me
 
 ---
 
-## 5. Database Schema (Conceptual)
+## 5. Database Schema (ERD Style)
 
 ### 5.1 Tables
 
-| Table | Columns | Type | Description |
-|-------|---------|------|-------------|
-| **users** | id (PK), username, password (hashed), nama_lengkap, role (enum: admin, staff, owner), created_at | - | User authentication & authorization |
-| **kategoris** | id (PK), nama, icon, color, created_at | - | Kategori barang (Minuman, Makanan, etc) |
-| **barangs** | id (PK), kode (unique), nama, kategori_id (FK), satuan, minimal_stok, created_at | - | Master data barang |
-| **suppliers** | id (PK), nama, alamat, telepon, email, catatan, created_at | - | Data supplier |
-| **barang_masuks** | id (PK), barang_id (FK), supplier_id (FK), user_id (FK), batch_number (auto), jumlah, harga_satuan, tanggal_masuk, tanggal_kadaluarsa (optional), created_at | - | Transaksi barang masuk (FIFO batch) |
-| **barang_keluars** | id (PK), barang_id (FK), user_id (FK), jumlah, tanggal_keluar, keterangan, created_at | - | Transaksi barang keluar |
-| **fifo_transactions** | id (PK), barang_keluar_id (FK), barang_masuk_id (FK), jumlah, created_at | - | Detail pemotongan FIFO per batch |
-| **laporans** | id (PK), periode, tipe (stok, expired, fifo, movement), data_json, created_at | - | Laporan tersimpan |
+| Table | Column | Type | Length | Constraint | Description |
+|-------|--------|------|--------|------------|-------------|
+| **users** | id | INT | - | PK, AUTO_INCREMENT | ID user |
+| | username | VARCHAR | 50 | NOT NULL, UNIQUE | Username login |
+| | password | VARCHAR | 255 | NOT NULL | Password (hashed) |
+| | nama_lengkap | VARCHAR | 100 | NOT NULL | Nama lengkap user |
+| | role | ENUM | - | NOT NULL | admin, staff, owner |
+| | created_at | TIMESTAMP | - | DEFAULT CURRENT_TIMESTAMP | Tanggal dibuat |
+| | updated_at | TIMESTAMP | - | ON UPDATE CURRENT_TIMESTAMP | Tanggal update |
+
+| **kategoris** | id | INT | - | PK, AUTO_INCREMENT | ID kategori |
+| | nama | VARCHAR | 50 | NOT NULL | Nama kategori |
+| | icon | VARCHAR | 50 | NULL | Icon (opsional) |
+| | color | VARCHAR | 20 | NULL | Warna hex |
+| | created_at | TIMESTAMP | - | DEFAULT CURRENT_TIMESTAMP | Tanggal dibuat |
+
+| **barangs** | id | INT | - | PK, AUTO_INCREMENT | ID barang |
+| | kode | VARCHAR | 20 | NOT NULL, UNIQUE | Kode barang |
+| | nama | VARCHAR | 100 | NOT NULL | Nama barang |
+| | kategori_id | INT | - | FK -> kategoris(id) | Relasi kategori |
+| | satuan | VARCHAR | 20 | NOT NULL | pcs, gram, liter, pack |
+| | minimal_stok | INT | - | DEFAULT 0 | Threshold stok kritis |
+| | created_at | TIMESTAMP | - | DEFAULT CURRENT_TIMESTAMP | Tanggal dibuat |
+| | updated_at | TIMESTAMP | - | ON UPDATE CURRENT_TIMESTAMP | Tanggal update |
+
+| **suppliers** | id | INT | - | PK, AUTO_INCREMENT | ID supplier |
+| | nama | VARCHAR | 100 | NOT NULL | Nama supplier |
+| | alamat | TEXT | - | NULL | Alamat lengkap |
+| | telepon | VARCHAR | 20 | NULL | No. telepon |
+| | email | VARCHAR | 100 | NULL | Email supplier |
+| | catatan | TEXT | - | NULL | Catatan tambahan |
+| | created_at | TIMESTAMP | - | DEFAULT CURRENT_TIMESTAMP | Tanggal dibuat |
+| | updated_at | TIMESTAMP | - | ON UPDATE CURRENT_TIMESTAMP | Tanggal update |
+
+| **barang_masuks** | id | INT | - | PK, AUTO_INCREMENT | ID transaksi masuk |
+| | barang_id | INT | - | FK -> barangs(id) | Relasi barang |
+| | supplier_id | INT | - | FK -> suppliers(id) | Relasi supplier |
+| | user_id | INT | - | FK -> users(id) | User yang input |
+| | batch_number | VARCHAR | 30 | NOT NULL | No. batch (auto) |
+| | jumlah | INT | - | NOT NULL | Jumlah masuk |
+| | harga_satuan | DECIMAL | 12,2 | NOT NULL | Harga per unit |
+| | tanggal_masuk | DATE | - | NOT NULL | Tanggal masuk |
+| | tanggal_kadaluarsa | DATE | - | NULL | Tgl kadaluarsa |
+| | created_at | TIMESTAMP | - | DEFAULT CURRENT_TIMESTAMP | Tanggal dibuat |
+
+| **barang_keluars** | id | INT | - | PK, AUTO_INCREMENT | ID transaksi keluar |
+| | barang_id | INT | - | FK -> barangs(id) | Relasi barang |
+| | user_id | INT | - | FK -> users(id) | User yang input |
+| | jumlah | INT | - | NOT NULL | Jumlah keluar |
+| | tanggal_keluar | DATE | - | NOT NULL | Tanggal keluar |
+| | keterangan | VARCHAR | 200 | NULL | Keperluan/keadaan |
+| | created_at | TIMESTAMP | - | DEFAULT CURRENT_TIMESTAMP | Tanggal dibuat |
+
+| **fifo_transactions** | id | INT | - | PK, AUTO_INCREMENT | ID detail FIFO |
+| | barang_keluar_id | INT | - | FK -> barang_keluars(id) | Transaksi keluar |
+| | barang_masuk_id | INT | - | FK -> barang_masuks(id) | Batch yang dipotong |
+| | jumlah | INT | - | NOT NULL | Jumlah dipotong |
+| | created_at | TIMESTAMP | - | DEFAULT CURRENT_TIMESTAMP | Tanggal dibuat |
+
+| **laporans** | id | INT | - | PK, AUTO_INCREMENT | ID laporan |
+| | periode | VARCHAR | 20 | NOT NULL | Bulan/Tahun |
+| | tipe | ENUM | - | NOT NULL | stok, expired, fifo, movement |
+| | data_json | JSON | - | NULL | Data laporan |
+| | created_at | TIMESTAMP | - | DEFAULT CURRENT_TIMESTAMP | Tanggal dibuat |
 
 ---
 
