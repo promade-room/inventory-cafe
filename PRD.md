@@ -167,70 +167,92 @@ Sistem informasi inventory berbasis web dengan implementasi metode FIFO untuk me
 
 ### 5.1 Tables
 
-| Table | Column | Type | Length | Constraint | Description |
-|-------|--------|------|--------|------------|-------------|
-| **users** | id | INT | - | PK, AUTO_INCREMENT | ID user |
-| | username | VARCHAR | 50 | NOT NULL, UNIQUE | Username login |
-| | password | VARCHAR | 255 | NOT NULL | Password (hashed) |
-| | nama_lengkap | VARCHAR | 100 | NOT NULL | Nama lengkap user |
-| | role | ENUM | - | NOT NULL | admin, staff, owner |
-| | created_at | TIMESTAMP | - | DEFAULT CURRENT_TIMESTAMP | Tanggal dibuat |
-| | updated_at | TIMESTAMP | - | ON UPDATE CURRENT_TIMESTAMP | Tanggal update |
+**users**
+| Field | Type | Note |
+|-------|------|------|
+| id | INT PK AUTO_INCREMENT | |
+| username | VARCHAR(50) NOT NULL UNIQUE | Username login |
+| password | VARCHAR(255) NOT NULL | Password (hashed) |
+| nama_lengkap | VARCHAR(100) NOT NULL | Nama lengkap user |
+| role | ENUM('admin','staff','owner') NOT NULL | Role pengguna |
+| created_at | TIMESTAMP | Default CURRENT_TIMESTAMP |
+| updated_at | TIMESTAMP | ON UPDATE CURRENT_TIMESTAMP |
 
-| **kategoris** | id | INT | - | PK, AUTO_INCREMENT | ID kategori |
-| | nama | VARCHAR | 50 | NOT NULL | Nama kategori |
-| | icon | VARCHAR | 50 | NULL | Icon (opsional) |
-| | color | VARCHAR | 20 | NULL | Warna hex |
-| | created_at | TIMESTAMP | - | DEFAULT CURRENT_TIMESTAMP | Tanggal dibuat |
+**kategoris**
+| Field | Type | Note |
+|-------|------|------|
+| id | INT PK AUTO_INCREMENT | |
+| nama | VARCHAR(50) NOT NULL | Nama kategori |
+| icon | VARCHAR(50) | Icon (nullable) |
+| color | VARCHAR(20) | Warna hex (nullable) |
+| created_at | TIMESTAMP | Default CURRENT_TIMESTAMP |
 
-| **barangs** | id | INT | - | PK, AUTO_INCREMENT | ID barang |
-| | kode | VARCHAR | 20 | NOT NULL, UNIQUE | Kode barang |
-| | nama | VARCHAR | 100 | NOT NULL | Nama barang |
-| | kategori_id | INT | - | FK -> kategoris(id) | Relasi kategori |
-| | satuan | VARCHAR | 20 | NOT NULL | pcs, gram, liter, pack |
-| | minimal_stok | INT | - | DEFAULT 0 | Threshold stok kritis |
-| | created_at | TIMESTAMP | - | DEFAULT CURRENT_TIMESTAMP | Tanggal dibuat |
-| | updated_at | TIMESTAMP | - | ON UPDATE CURRENT_TIMESTAMP | Tanggal update |
+**barangs**
+| Field | Type | Note |
+|-------|------|------|
+| id | INT PK AUTO_INCREMENT | |
+| kode | VARCHAR(20) NOT NULL UNIQUE | Kode barang |
+| nama | VARCHAR(100) NOT NULL | Nama barang |
+| kategori_id | INT FK → kategoris(id) | Relasi kategori |
+| satuan | VARCHAR(20) NOT NULL | pcs, gram, liter, pack |
+| minimal_stok | INT DEFAULT 0 | Threshold stok kritis |
+| created_at | TIMESTAMP | Default CURRENT_TIMESTAMP |
+| updated_at | TIMESTAMP | ON UPDATE CURRENT_TIMESTAMP |
 
-| **suppliers** | id | INT | - | PK, AUTO_INCREMENT | ID supplier |
-| | nama | VARCHAR | 100 | NOT NULL | Nama supplier |
-| | alamat | TEXT | - | NULL | Alamat lengkap |
-| | telepon | VARCHAR | 20 | NULL | No. telepon |
-| | email | VARCHAR | 100 | NULL | Email supplier |
-| | catatan | TEXT | - | NULL | Catatan tambahan |
-| | created_at | TIMESTAMP | - | DEFAULT CURRENT_TIMESTAMP | Tanggal dibuat |
-| | updated_at | TIMESTAMP | - | ON UPDATE CURRENT_TIMESTAMP | Tanggal update |
+**suppliers**
+| Field | Type | Note |
+|-------|------|------|
+| id | INT PK AUTO_INCREMENT | |
+| nama | VARCHAR(100) NOT NULL | Nama supplier |
+| alamat | TEXT | Alamat lengkap (nullable) |
+| telepon | VARCHAR(20) | No. telepon (nullable) |
+| email | VARCHAR(100) | Email (nullable) |
+| catatan | TEXT | Catatan (nullable) |
+| created_at | TIMESTAMP | Default CURRENT_TIMESTAMP |
+| updated_at | TIMESTAMP | ON UPDATE CURRENT_TIMESTAMP |
 
-| **barang_masuks** | id | INT | - | PK, AUTO_INCREMENT | ID transaksi masuk |
-| | barang_id | INT | - | FK -> barangs(id) | Relasi barang |
-| | supplier_id | INT | - | FK -> suppliers(id) | Relasi supplier |
-| | user_id | INT | - | FK -> users(id) | User yang input |
-| | batch_number | VARCHAR | 30 | NOT NULL | No. batch (auto) |
-| | jumlah | INT | - | NOT NULL | Jumlah masuk |
-| | harga_satuan | DECIMAL | 12,2 | NOT NULL | Harga per unit |
-| | tanggal_masuk | DATE | - | NOT NULL | Tanggal masuk |
-| | tanggal_kadaluarsa | DATE | - | NULL | Tgl kadaluarsa |
-| | created_at | TIMESTAMP | - | DEFAULT CURRENT_TIMESTAMP | Tanggal dibuat |
+**barang_masuks**
+| Field | Type | Note |
+|-------|------|------|
+| id | INT PK AUTO_INCREMENT | |
+| barang_id | INT FK → barangs(id) | Relasi barang |
+| supplier_id | INT FK → suppliers(id) | Relasi supplier |
+| user_id | INT FK → users(id) | User yang input |
+| batch_number | VARCHAR(30) NOT NULL | No. batch (auto generated) |
+| jumlah | INT NOT NULL | Jumlah masuk |
+| harga_satuan | DECIMAL(12,2) NOT NULL | Harga per unit |
+| tanggal_masuk | DATE NOT NULL | Tanggal masuk |
+| tanggal_kadaluarsa | DATE | Tgl kadaluarsa (nullable) |
+| created_at | TIMESTAMP | Default CURRENT_TIMESTAMP |
 
-| **barang_keluars** | id | INT | - | PK, AUTO_INCREMENT | ID transaksi keluar |
-| | barang_id | INT | - | FK -> barangs(id) | Relasi barang |
-| | user_id | INT | - | FK -> users(id) | User yang input |
-| | jumlah | INT | - | NOT NULL | Jumlah keluar |
-| | tanggal_keluar | DATE | - | NOT NULL | Tanggal keluar |
-| | keterangan | VARCHAR | 200 | NULL | Keperluan/keadaan |
-| | created_at | TIMESTAMP | - | DEFAULT CURRENT_TIMESTAMP | Tanggal dibuat |
+**barang_keluars**
+| Field | Type | Note |
+|-------|------|------|
+| id | INT PK AUTO_INCREMENT | |
+| barang_id | INT FK → barangs(id) | Relasi barang |
+| user_id | INT FK → users(id) | User yang input |
+| jumlah | INT NOT NULL | Jumlah keluar |
+| tanggal_keluar | DATE NOT NULL | Tanggal keluar |
+| keterangan | VARCHAR(200) | Keperluan/keadaan (nullable) |
+| created_at | TIMESTAMP | Default CURRENT_TIMESTAMP |
 
-| **fifo_transactions** | id | INT | - | PK, AUTO_INCREMENT | ID detail FIFO |
-| | barang_keluar_id | INT | - | FK -> barang_keluars(id) | Transaksi keluar |
-| | barang_masuk_id | INT | - | FK -> barang_masuks(id) | Batch yang dipotong |
-| | jumlah | INT | - | NOT NULL | Jumlah dipotong |
-| | created_at | TIMESTAMP | - | DEFAULT CURRENT_TIMESTAMP | Tanggal dibuat |
+**fifo_transactions**
+| Field | Type | Note |
+|-------|------|------|
+| id | INT PK AUTO_INCREMENT | |
+| barang_keluar_id | INT FK → barang_keluars(id) | Transaksi keluar |
+| barang_masuk_id | INT FK → barang_masuks(id) | Batch yang dipotong |
+| jumlah | INT NOT NULL | Jumlah dipotong |
+| created_at | TIMESTAMP | Default CURRENT_TIMESTAMP |
 
-| **laporans** | id | INT | - | PK, AUTO_INCREMENT | ID laporan |
-| | periode | VARCHAR | 20 | NOT NULL | Bulan/Tahun |
-| | tipe | ENUM | - | NOT NULL | stok, expired, fifo, movement |
-| | data_json | JSON | - | NULL | Data laporan |
-| | created_at | TIMESTAMP | - | DEFAULT CURRENT_TIMESTAMP | Tanggal dibuat |
+**laporans**
+| Field | Type | Note |
+|-------|------|------|
+| id | INT PK AUTO_INCREMENT | |
+| periode | VARCHAR(20) NOT NULL | Bulan/Tahun |
+| tipe | ENUM('stok','expired','fifo','movement') NOT NULL | Jenis laporan |
+| data_json | JSON | Data laporan (nullable) |
+| created_at | TIMESTAMP | Default CURRENT_TIMESTAMP |
 
 ---
 
