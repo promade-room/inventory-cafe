@@ -58,7 +58,7 @@ export default function KategoriPage() {
           </thead>
           <tbody className="divide-y divide-gray-200">
             {data.map((item) => (
-              <tr key={item.id} className="hover:bg-slate-700">
+              <tr key={item.id} className="hover:bg-orange-100">
                 <td className="px-6 py-4 text-sm text-gray-900">{item.id}</td>
                 <td className="px-6 py-4 text-sm text-gray-900 font-medium">{item.nama}</td>
                 <td className="px-6 py-4 text-2xl">{item.icon || '📦'}</td>

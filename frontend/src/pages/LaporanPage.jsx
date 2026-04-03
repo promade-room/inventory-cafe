@@ -59,7 +59,7 @@ export default function LaporanPage() {
                 </thead>
                 <tbody className="divide-y divide-gray-200">
                   {stok.map(item => (
-                    <tr key={item.id} className="hover:bg-slate-700">
+                    <tr key={item.id} className="hover:bg-orange-100">
                       <td className="px-4 py-3 text-sm font-mono">{item.kode}</td>
                       <td className="px-4 py-3 text-sm font-medium">{item.nama}</td>
                       <td className="px-4 py-3 text-sm">{item.kategori_nama || '-'}</td>
@@ -88,7 +88,7 @@ export default function LaporanPage() {
                 </thead>
                 <tbody className="divide-y divide-gray-200">
                   {expired.map(item => (
-                    <tr key={item.id} className="hover:bg-slate-700">
+                    <tr key={item.id} className="hover:bg-orange-100">
                       <td className="px-4 py-3 text-sm font-medium">{item.barang_nama}</td>
                       <td className="px-4 py-3 text-sm font-mono">{item.batch_number}</td>
                       <td className="px-4 py-3 text-right">{item.sisa || 0}</td>

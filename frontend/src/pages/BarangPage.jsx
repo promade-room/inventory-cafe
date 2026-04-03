@@ -81,7 +81,7 @@ export default function BarangPage() {
           </thead>
           <tbody className="divide-y divide-gray-200">
             {data.map((item) => (
-              <tr key={item.id} className="hover:bg-slate-700">
+              <tr key={item.id} className="hover:bg-orange-100">
                 <td className="px-4 py-3 text-sm font-mono">{item.kode}</td>
                 <td className="px-4 py-3 text-sm font-medium">{item.nama}</td>
                 <td className="px-4 py-3 text-sm">{item.kategori_nama || '-'}</td>

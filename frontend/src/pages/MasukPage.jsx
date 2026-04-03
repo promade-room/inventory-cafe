@@ -72,7 +72,7 @@ export default function MasukPage() {
           </thead>
           <tbody className="divide-y divide-gray-200">
             {data.map((item) => (
-              <tr key={item.id} className="hover:bg-slate-700">
+              <tr key={item.id} className="hover:bg-orange-100">
                 <td className="px-4 py-3 text-sm">{item.tanggal_masuk}</td>
                 <td className="px-4 py-3 text-sm font-mono">{item.barang_kode}</td>
                 <td className="px-4 py-3 text-sm font-medium">{item.barang_nama}</td>
