@@ -167,75 +167,16 @@ Sistem informasi inventory berbasis web dengan implementasi metode FIFO untuk me
 
 ### 5.1 Tables
 
-```
-users
-├── id (PK)
-├── username
-├── password (hashed)
-├── nama_lengkap
-├── role (enum: admin, staff, owner)
-└── created_at
-
-kategoris
-├── id (PK)
-├── nama
-├── icon
-├── color
-└── created_at
-
-barangs
-├── id (PK)
-├── kode (unique)
-├── nama
-├── kategori_id (FK)
-├── satuan
-├── minimal_stok
-└── created_at
-
-suppliers
-├── id (PK)
-├── nama
-├── alamat
-├── telepon
-├── email
-├── catatan
-└── created_at
-
-barang_masuks
-├── id (PK)
-├── barang_id (FK)
-├── supplier_id (FK)
-├── user_id (FK)
-├── batch_number (auto)
-├── jumlah
-├── harga_satuan
-├── tanggal_masuk
-├── tanggal_kadaluarsa (optional)
-├── created_at
-
-barang_keluars
-├── id (PK)
-├── barang_id (FK)
-├── user_id (FK)
-├── jumlah
-├── tanggal_keluar
-├── keterangan
-├── created_at
-
-fifo_transactions (detail pemotongan FIFO)
-├── id (PK)
-├── barang_keluar_id (FK)
-├── barang_masuk_id (FK) -- batch yang dipotong
-├── jumlah
-└── created_at
-
-laporans
-├── id (PK)
-├── periode
-├── tipe (stok, expired, fifo, movement)
-├── data_json
-├── created_at
-```
+| Table | Columns | Type | Description |
+|-------|---------|------|-------------|
+| **users** | id (PK), username, password (hashed), nama_lengkap, role (enum: admin, staff, owner), created_at | - | User authentication & authorization |
+| **kategoris** | id (PK), nama, icon, color, created_at | - | Kategori barang (Minuman, Makanan, etc) |
+| **barangs** | id (PK), kode (unique), nama, kategori_id (FK), satuan, minimal_stok, created_at | - | Master data barang |
+| **suppliers** | id (PK), nama, alamat, telepon, email, catatan, created_at | - | Data supplier |
+| **barang_masuks** | id (PK), barang_id (FK), supplier_id (FK), user_id (FK), batch_number (auto), jumlah, harga_satuan, tanggal_masuk, tanggal_kadaluarsa (optional), created_at | - | Transaksi barang masuk (FIFO batch) |
+| **barang_keluars** | id (PK), barang_id (FK), user_id (FK), jumlah, tanggal_keluar, keterangan, created_at | - | Transaksi barang keluar |
+| **fifo_transactions** | id (PK), barang_keluar_id (FK), barang_masuk_id (FK), jumlah, created_at | - | Detail pemotongan FIFO per batch |
+| **laporans** | id (PK), periode, tipe (stok, expired, fifo, movement), data_json, created_at | - | Laporan tersimpan |
 
 ---
 
