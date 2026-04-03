@@ -140,16 +140,14 @@ Sistem informasi inventory berbasis web dengan implementasi metode FIFO untuk me
 - Profile user
 - Change password
 - Pengaturan minimal stok default
-- Pengaturan notifikasi (email threshold)
 
 ---
 
 ## 4. Additional Fitur (Enhancement)
 
 ### 4.1 Notifikasi & Alerts
-- Alert stok di bawah minimal (dashboard + email)
-- Alert barang expired dalam 7 hari
-- Weekly summary report via email (opsional)
+- Alert stok di bawah minimal (via dashboard - refresh manual)
+- Alert barang expired dalam 7 hari (via dashboard - refresh manual)
 
 ### 4.2 History & Audit Trail
 - Log semua transaksi (who, when, what)
@@ -293,16 +291,23 @@ laporans
 
 ## 7. UI/UX Guidelines
 
-### Tema: Flat Design
+### Tema: Flat Design (Coffee Shop Theme - Silver Orange)
 
 **Color Palette:**
-- Primary: #2563EB (Blue)
-- Secondary: #64748B (Slate)
-- Accent: #10B981 (Emerald - untuk stok aman)
-- Warning: #F59E0B (Amber - untuk stok kritis)
-- Danger: #EF4444 (Red - untuk expired/alert)
-- Background: #F8FAFC (Light gray)
+- Primary: #D97706 (Amber/Orange - kopi)
+- Secondary: #6B7280 (Gray silver)
+- Accent: #F59E0B (Orange)
+- Background: #F3F4F6 (Light gray)
 - Card: #FFFFFF (White)
+- Text: #1F2937 (Dark gray)
+- Success/Stok Aman: #10B981 (Green)
+- Warning/Stok Kritis: #F59E0B (Amber)
+- Danger/Expired: #EF4444 (Red)
+
+**Coffee Shop Vibes:**
+- Dominan silver/gray dengan accent orange kopi
+- Clean, modern flat design
+- Warm but professional
 
 **Typography:**
 - Font: Inter / Poppins
