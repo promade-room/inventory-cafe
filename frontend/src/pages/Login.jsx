@@ -27,7 +27,7 @@ export default function Login() {
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-100 to-gray-300">
       <div className="bg-white rounded-2xl shadow-xl p-8 w-full max-w-md">
         <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-primary">Inventory Cafe</h1>
+          <h1 className="text-3xl font-bold text-primary">Inventory Andung Cafe</h1>
           <p className="text-gray-500 mt-2">Sistem Informasi Inventory</p>
         </div>
 
@@ -72,7 +72,6 @@ export default function Login() {
         </form>
 
         <p className="text-center text-gray-500 text-sm mt-6">
-          Demo: admin / admin
         </p>
       </div>
     </div>
