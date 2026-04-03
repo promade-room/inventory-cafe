@@ -46,20 +46,20 @@ export default function LaporanPage() {
           {activeTab === 'stok' && (
             <div className="bg-white rounded-xl shadow-sm overflow-hidden">
               <table className="w-full">
-                <thead className="bg-gray-50">
+                <thead className="bg-slate-700">
                   <tr>
-                    <th className="px-4 py-3 text-left text-sm font-medium text-gray-500">Kode</th>
-                    <th className="px-4 py-3 text-left text-sm font-medium text-gray-500">Nama</th>
-                    <th className="px-4 py-3 text-left text-sm font-medium text-gray-500">Kat</th>
-                    <th className="px-4 py-3 text-right text-sm font-medium text-gray-500">Masuk</th>
-                    <th className="px-4 py-3 text-right text-sm font-medium text-gray-500">Keluar</th>
-                    <th className="px-4 py-3 text-right text-sm font-medium text-gray-500">Stok</th>
-                    <th className="px-4 py-3 text-right text-sm font-medium text-gray-500">Nilai</th>
+                    <th className="px-4 py-3 text-left text-sm font-medium text-gray-200">Kode</th>
+                    <th className="px-4 py-3 text-left text-sm font-medium text-gray-200">Nama</th>
+                    <th className="px-4 py-3 text-left text-sm font-medium text-gray-200">Kat</th>
+                    <th className="px-4 py-3 text-right text-sm font-medium text-gray-200">Masuk</th>
+                    <th className="px-4 py-3 text-right text-sm font-medium text-gray-200">Keluar</th>
+                    <th className="px-4 py-3 text-right text-sm font-medium text-gray-200">Stok</th>
+                    <th className="px-4 py-3 text-right text-sm font-medium text-gray-200">Nilai</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-200">
                   {stok.map(item => (
-                    <tr key={item.id} className="hover:bg-gray-50">
+                    <tr key={item.id} className="hover:bg-slate-700">
                       <td className="px-4 py-3 text-sm font-mono">{item.kode}</td>
                       <td className="px-4 py-3 text-sm font-medium">{item.nama}</td>
                       <td className="px-4 py-3 text-sm">{item.kategori_nama || '-'}</td>
@@ -77,18 +77,18 @@ export default function LaporanPage() {
           {activeTab === 'expired' && (
             <div className="bg-white rounded-xl shadow-sm overflow-hidden">
               <table className="w-full">
-                <thead className="bg-gray-50">
+                <thead className="bg-slate-700">
                   <tr>
-                    <th className="px-4 py-3 text-left text-sm font-medium text-gray-500">Barang</th>
-                    <th className="px-4 py-3 text-left text-sm font-medium text-gray-500">Batch</th>
-                    <th className="px-4 py-3 text-right text-sm font-medium text-gray-500">Sisa</th>
-                    <th className="px-4 py-3 text-left text-sm font-medium text-gray-500">Tgl Expired</th>
-                    <th className="px-4 py-3 text-left text-sm font-medium text-gray-500">Status</th>
+                    <th className="px-4 py-3 text-left text-sm font-medium text-gray-200">Barang</th>
+                    <th className="px-4 py-3 text-left text-sm font-medium text-gray-200">Batch</th>
+                    <th className="px-4 py-3 text-right text-sm font-medium text-gray-200">Sisa</th>
+                    <th className="px-4 py-3 text-left text-sm font-medium text-gray-200">Tgl Expired</th>
+                    <th className="px-4 py-3 text-left text-sm font-medium text-gray-200">Status</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-200">
                   {expired.map(item => (
-                    <tr key={item.id} className="hover:bg-gray-50">
+                    <tr key={item.id} className="hover:bg-slate-700">
                       <td className="px-4 py-3 text-sm font-medium">{item.barang_nama}</td>
                       <td className="px-4 py-3 text-sm font-mono">{item.batch_number}</td>
                       <td className="px-4 py-3 text-right">{item.sisa || 0}</td>
@@ -102,7 +102,7 @@ export default function LaporanPage() {
                   ))}
                 </tbody>
               </table>
-              {expired.length === 0 && <p className="text-center py-8 text-gray-500">Tidak ada barang expired</p>}
+              {expired.length === 0 && <p className="text-center py-8 text-gray-200">Tidak ada barang expired</p>}
             </div>
           )}
 
@@ -119,7 +119,7 @@ export default function LaporanPage() {
                   ))}
                 </div>
               </div>
-              <p className="text-gray-500 text-sm">Grafik movement bisa ditambahkan dengan library chart.js</p>
+              <p className="text-gray-200 text-sm">Grafik movement bisa ditambahkan dengan library chart.js</p>
             </div>
           )}
         </>

@@ -47,18 +47,18 @@ export default function KategoriPage() {
 
       <div className="bg-white rounded-xl shadow-sm overflow-hidden">
         <table className="w-full">
-          <thead className="bg-gray-50">
+          <thead className="bg-slate-700">
             <tr>
-              <th className="px-6 py-3 text-left text-sm font-medium text-gray-500">ID</th>
-              <th className="px-6 py-3 text-left text-sm font-medium text-gray-500">Nama</th>
-              <th className="px-6 py-3 text-left text-sm font-medium text-gray-500">Icon</th>
-              <th className="px-6 py-3 text-left text-sm font-medium text-gray-500">Warna</th>
-              <th className="px-6 py-3 text-right text-sm font-medium text-gray-500">Aksi</th>
+              <th className="px-6 py-3 text-left text-sm font-medium text-gray-200">ID</th>
+              <th className="px-6 py-3 text-left text-sm font-medium text-gray-200">Nama</th>
+              <th className="px-6 py-3 text-left text-sm font-medium text-gray-200">Icon</th>
+              <th className="px-6 py-3 text-left text-sm font-medium text-gray-200">Warna</th>
+              <th className="px-6 py-3 text-right text-sm font-medium text-gray-200">Aksi</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-200">
             {data.map((item) => (
-              <tr key={item.id} className="hover:bg-gray-50">
+              <tr key={item.id} className="hover:bg-slate-700">
                 <td className="px-6 py-4 text-sm text-gray-900">{item.id}</td>
                 <td className="px-6 py-4 text-sm text-gray-900 font-medium">{item.nama}</td>
                 <td className="px-6 py-4 text-2xl">{item.icon || '📦'}</td>

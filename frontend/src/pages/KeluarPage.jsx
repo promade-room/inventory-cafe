@@ -52,26 +52,26 @@ export default function KeluarPage() {
 
       <div className="bg-white rounded-xl shadow-sm overflow-hidden">
         <table className="w-full">
-          <thead className="bg-gray-50">
+          <thead className="bg-slate-700">
             <tr>
-              <th className="px-4 py-3 text-left text-sm font-medium text-gray-500">Tanggal</th>
-              <th className="px-4 py-3 text-left text-sm font-medium text-gray-500">Kode</th>
-              <th className="px-4 py-3 text-left text-sm font-medium text-gray-500">Barang</th>
-              <th className="px-4 py-3 text-right text-sm font-medium text-gray-500">Jumlah</th>
-              <th className="px-4 py-3 text-left text-sm font-medium text-gray-500">Keterangan</th>
-              <th className="px-4 py-3 text-left text-sm font-medium text-gray-500">User</th>
-              <th className="px-4 py-3 text-right text-sm font-medium text-gray-500">Aksi</th>
+              <th className="px-4 py-3 text-left text-sm font-medium text-gray-200">Tanggal</th>
+              <th className="px-4 py-3 text-left text-sm font-medium text-gray-200">Kode</th>
+              <th className="px-4 py-3 text-left text-sm font-medium text-gray-200">Barang</th>
+              <th className="px-4 py-3 text-right text-sm font-medium text-gray-200">Jumlah</th>
+              <th className="px-4 py-3 text-left text-sm font-medium text-gray-200">Keterangan</th>
+              <th className="px-4 py-3 text-left text-sm font-medium text-gray-200">User</th>
+              <th className="px-4 py-3 text-right text-sm font-medium text-gray-200">Aksi</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-200">
             {data.map((item) => (
-              <tr key={item.id} className="hover:bg-gray-50">
+              <tr key={item.id} className="hover:bg-slate-700">
                 <td className="px-4 py-3 text-sm">{item.tanggal_keluar}</td>
                 <td className="px-4 py-3 text-sm font-mono">{item.barang_kode}</td>
                 <td className="px-4 py-3 text-sm font-medium">{item.barang_nama}</td>
                 <td className="px-4 py-3 text-right font-medium">{item.jumlah}</td>
                 <td className="px-4 py-3 text-sm">{item.keterangan || '-'}</td>
-                <td className="px-4 py-3 text-sm text-gray-500">{item.user_nama}</td>
+                <td className="px-4 py-3 text-sm text-gray-200">{item.user_nama}</td>
                 <td className="px-4 py-3 text-right">
                   <button onClick={() => handleDelete(item.id)} className="text-red-600 hover:underline">Hapus</button>
                 </td>
@@ -79,7 +79,7 @@ export default function KeluarPage() {
             ))}
           </tbody>
         </table>
-        {data.length === 0 && <p className="text-center py-8 text-gray-500">Tidak ada data</p>}
+        {data.length === 0 && <p className="text-center py-8 text-gray-200">Tidak ada data</p>}
       </div>
 
       {modal && (
@@ -104,7 +104,7 @@ export default function KeluarPage() {
                   <option value="Sample">Sample</option>
                   <option value="Lainnya">Lainnya</option>
                 </select></div>
-              <p className="text-sm text-gray-500 mb-4">Sistem akan otomatis mengurangi dari batch tertua (FIFO)</p>
+              <p className="text-sm text-gray-200 mb-4">Sistem akan otomatis mengurangi dari batch tertua (FIFO)</p>
               <div className="flex justify-end gap-3">
                 <button type="button" onClick={() => setModal(false)} className="px-4 py-2 border rounded-lg">Batal</button>
                 <button type="submit" className="px-4 py-2 bg-primary text-white rounded-lg">Simpan</button>
