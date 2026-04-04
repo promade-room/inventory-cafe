@@ -120,7 +120,6 @@ export default function LaporanPage() {
                   ))}
                 </div>
               </div>
-              <p className="text-gray-700 text-sm">Grafik movement bisa ditambahkan dengan library chart.js</p>
             </div>
           )}
         </>
