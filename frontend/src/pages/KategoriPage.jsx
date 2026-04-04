@@ -51,8 +51,8 @@ export default function KategoriPage() {
             <tr>
               <th className="px-6 py-3 text-left text-sm font-medium text-white">ID</th>
               <th className="px-6 py-3 text-left text-sm font-medium text-white">Nama</th>
-              <th className="px-6 py-3 text-left text-sm font-medium text-gray-700">Icon</th>
-              <th className="px-6 py-3 text-left text-sm font-medium text-gray-700">Warna</th>
+              <th className="px-6 py-3 text-left text-sm font-medium text-white">Icon</th>
+              <th className="px-6 py-3 text-left text-sm font-medium text-white">Warna</th>
               <th className="px-6 py-3 text-right text-sm font-medium text-white">Aksi</th>
             </tr>
           </thead>
