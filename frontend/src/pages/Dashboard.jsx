@@ -60,7 +60,7 @@ export default function Dashboard() {
                 <div key={item.id} className="flex justify-between items-center p-3 bg-red-50 rounded-lg">
                   <div>
                     <p className="font-medium text-gray-800">{item.nama}</p>
-                    <p className="text-sm text-gray-700">Min: {formatNumber(item.minimal_stok)}</p>
+                    <p className="text-sm text-white">Min: {formatNumber(item.minimal_stok)}</p>
                   </div>
                   <span className="text-red-600 font-bold">{formatNumber(item.stok_sekarang)}</span>
                 </div>
@@ -82,7 +82,7 @@ export default function Dashboard() {
                 <div key={item.id} className="flex justify-between items-center p-3 bg-orange-50 rounded-lg">
                   <div>
                     <p className="font-medium text-gray-800">{item.barang_nama}</p>
-                    <p className="text-sm text-gray-700">Batch: {item.batch_number}</p>
+                    <p className="text-sm text-white">Batch: {item.batch_number}</p>
                   </div>
                   <span className={`font-bold ${item.hari <= 3 ? 'text-red-600' : 'text-orange-600'}`}>
                     {item.hari} hari

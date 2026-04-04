@@ -61,14 +61,14 @@ export default function MasukPage() {
           <thead className="bg-slate-700">
             <tr>
               <th className="px-4 py-3 text-left text-sm font-medium text-gray-700">Tanggal</th>
-              <th className="px-4 py-3 text-left text-sm font-medium text-gray-700">Kode</th>
+              <th className="px-4 py-3 text-left text-sm font-medium text-white">Kode</th>
               <th className="px-4 py-3 text-left text-sm font-medium text-gray-700">Barang</th>
-              <th className="px-4 py-3 text-left text-sm font-medium text-gray-700">Supplier</th>
+              <th className="px-4 py-3 text-left text-sm font-medium text-white">Supplier</th>
               <th className="px-4 py-3 text-right text-sm font-medium text-gray-700">Jumlah</th>
               <th className="px-4 py-3 text-right text-sm font-medium text-gray-700">Harga</th>
-              <th className="px-4 py-3 text-left text-sm font-medium text-gray-700">Batch</th>
+              <th className="px-4 py-3 text-left text-sm font-medium text-white">Batch</th>
               <th className="px-4 py-3 text-left text-sm font-medium text-gray-700">Exp</th>
-              <th className="px-4 py-3 text-right text-sm font-medium text-gray-700">Aksi</th>
+              <th className="px-4 py-3 text-right text-sm font-medium text-white">Aksi</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-200">

@@ -71,13 +71,13 @@ export default function BarangPage() {
         <table className="w-full">
           <thead className="bg-slate-700">
             <tr>
-              <th className="px-4 py-3 text-left text-sm font-medium text-gray-700">Kode</th>
-              <th className="px-4 py-3 text-left text-sm font-medium text-gray-700">Nama</th>
-              <th className="px-4 py-3 text-left text-sm font-medium text-gray-700">Kategori</th>
+              <th className="px-4 py-3 text-left text-sm font-medium text-white">Kode</th>
+              <th className="px-4 py-3 text-left text-sm font-medium text-white">Nama</th>
+              <th className="px-4 py-3 text-left text-sm font-medium text-white">Kategori</th>
               <th className="px-4 py-3 text-left text-sm font-medium text-gray-700">Satuan</th>
-              <th className="px-4 py-3 text-right text-sm font-medium text-gray-700">Stok</th>
-              <th className="px-4 py-3 text-right text-sm font-medium text-gray-700">Min</th>
-              <th className="px-4 py-3 text-right text-sm font-medium text-gray-700">Aksi</th>
+              <th className="px-4 py-3 text-right text-sm font-medium text-white">Stok</th>
+              <th className="px-4 py-3 text-right text-sm font-medium text-white">Min</th>
+              <th className="px-4 py-3 text-right text-sm font-medium text-white">Aksi</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-200">
