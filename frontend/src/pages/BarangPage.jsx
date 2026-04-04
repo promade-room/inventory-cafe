@@ -74,7 +74,7 @@ export default function BarangPage() {
               <th className="px-4 py-3 text-left text-sm font-medium text-white">Kode</th>
               <th className="px-4 py-3 text-left text-sm font-medium text-white">Nama</th>
               <th className="px-4 py-3 text-left text-sm font-medium text-white">Kategori</th>
-              <th className="px-4 py-3 text-left text-sm font-medium text-gray-700">Satuan</th>
+              <th className="px-4 py-3 text-left text-sm font-medium text-white">Satuan</th>
               <th className="px-4 py-3 text-right text-sm font-medium text-white">Stok</th>
               <th className="px-4 py-3 text-right text-sm font-medium text-white">Min</th>
               <th className="px-4 py-3 text-right text-sm font-medium text-white">Aksi</th>
