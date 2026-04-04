@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { getDashboardStats } from '../services/api';
+import { formatRupiah, formatNumber } from '../utils/format';
 
 export default function Dashboard() {
   const [stats, setStats] = useState(null);
@@ -30,19 +31,19 @@ export default function Dashboard() {
       <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
         <div className="bg-white rounded-xl shadow-sm p-6 border-l-4 border-primary">
           <p className="text-gray-700 text-sm">Total Barang</p>
-          <p className="text-3xl font-bold text-gray-800">{stats?.total_barang || 0}</p>
+          <p className="text-3xl font-bold text-gray-800">{formatNumber(stats?.total_barang || 0)}</p>
         </div>
         <div className="bg-white rounded-xl shadow-sm p-6 border-l-4 border-green-500">
           <p className="text-gray-700 text-sm">Nilai Stok</p>
-          <p className="text-3xl font-bold text-gray-800">Rp {(stats?.total_nilai_stok || 0).toLocaleString('id-ID')}</p>
+          <p className="text-3xl font-bold text-gray-800">{formatRupiah(stats?.total_nilai_stok || 0)}</p>
         </div>
         <div className="bg-white rounded-xl shadow-sm p-6 border-l-4 border-blue-500">
           <p className="text-gray-700 text-sm">Masuk Hari Ini</p>
-          <p className="text-3xl font-bold text-gray-800">{stats?.masuk_hari_ini?.jumlah || 0}</p>
+          <p className="text-3xl font-bold text-gray-800">{formatNumber(stats?.masuk_hari_ini?.jumlah || 0)}</p>
         </div>
         <div className="bg-white rounded-xl shadow-sm p-6 border-l-4 border-orange-500">
           <p className="text-gray-700 text-sm">Keluar Hari Ini</p>
-          <p className="text-3xl font-bold text-gray-800">{stats?.keluar_hari_ini?.jumlah || 0}</p>
+          <p className="text-3xl font-bold text-gray-800">{formatNumber(stats?.keluar_hari_ini?.jumlah || 0)}</p>
         </div>
       </div>
 
@@ -59,9 +60,9 @@ export default function Dashboard() {
                 <div key={item.id} className="flex justify-between items-center p-3 bg-red-50 rounded-lg">
                   <div>
                     <p className="font-medium text-gray-800">{item.nama}</p>
-                    <p className="text-sm text-gray-700">Min: {item.minimal_stok}</p>
+                    <p className="text-sm text-gray-700">Min: {formatNumber(item.minimal_stok)}</p>
                   </div>
-                  <span className="text-red-600 font-bold">{item.stok_sekarang}</span>
+                  <span className="text-red-600 font-bold">{formatNumber(item.stok_sekarang)}</span>
                 </div>
               ))}
             </div>

@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { getMasuk, getBarangs, getSuppliers, createMasuk, deleteMasuk } from '../services/api';
+import { formatRupiah, formatDate, formatNumber } from '../utils/format';
 
 export default function MasukPage() {
   const [data, setData] = useState([]);
@@ -73,14 +74,14 @@ export default function MasukPage() {
           <tbody className="divide-y divide-gray-200">
             {data.map((item) => (
               <tr key={item.id} className="hover:bg-orange-100">
-                <td className="px-4 py-3 text-sm">{item.tanggal_masuk}</td>
+                <td className="px-4 py-3 text-sm">{formatDate(item.tanggal_masuk)}</td>
                 <td className="px-4 py-3 text-sm font-mono">{item.barang_kode}</td>
                 <td className="px-4 py-3 text-sm font-medium">{item.barang_nama}</td>
                 <td className="px-4 py-3 text-sm">{item.supplier_nama || '-'}</td>
-                <td className="px-4 py-3 text-right font-medium">{item.jumlah}</td>
-                <td className="px-4 py-3 text-right">Rp {parseFloat(item.harga_satuan).toLocaleString('id-ID')}</td>
+                <td className="px-4 py-3 text-right font-medium">{formatNumber(item.jumlah)}</td>
+                <td className="px-4 py-3 text-right">{formatRupiah(item.harga_satuan)}</td>
                 <td className="px-4 py-3 text-sm font-mono text-gray-700">{item.batch_number}</td>
-                <td className="px-4 py-3 text-sm">{item.tanggal_kadaluarsa || '-'}</td>
+                <td className="px-4 py-3 text-sm">{formatDate(item.tanggal_kadaluarsa)}</td>
                 <td className="px-4 py-3 text-right">
                   <button onClick={() => handleDelete(item.id)} className="text-red-600 hover:underline">Hapus</button>
                 </td>

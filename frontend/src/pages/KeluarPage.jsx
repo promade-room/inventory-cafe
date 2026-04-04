@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { getKeluar, getBarangs, createKeluar, deleteKeluar } from '../services/api';
+import { formatDate, formatNumber } from '../utils/format';
 
 export default function KeluarPage() {
   const [data, setData] = useState([]);
@@ -66,10 +67,10 @@ export default function KeluarPage() {
           <tbody className="divide-y divide-gray-200">
             {data.map((item) => (
               <tr key={item.id} className="hover:bg-orange-100">
-                <td className="px-4 py-3 text-sm">{item.tanggal_keluar}</td>
+                <td className="px-4 py-3 text-sm">{formatDate(item.tanggal_keluar)}</td>
                 <td className="px-4 py-3 text-sm font-mono">{item.barang_kode}</td>
                 <td className="px-4 py-3 text-sm font-medium">{item.barang_nama}</td>
-                <td className="px-4 py-3 text-right font-medium">{item.jumlah}</td>
+                <td className="px-4 py-3 text-right font-medium">{formatNumber(item.jumlah)}</td>
                 <td className="px-4 py-3 text-sm">{item.keterangan || '-'}</td>
                 <td className="px-4 py-3 text-sm text-gray-700">{item.user_nama}</td>
                 <td className="px-4 py-3 text-right">

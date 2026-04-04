@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { getBarangs, getKategoris, createBarang, updateBarang, deleteBarang } from '../services/api';
+import { formatNumber } from '../utils/format';
 
 export default function BarangPage() {
   const [data, setData] = useState([]);
@@ -87,9 +88,9 @@ export default function BarangPage() {
                 <td className="px-4 py-3 text-sm">{item.kategori_nama || '-'}</td>
                 <td className="px-4 py-3 text-sm">{item.satuan}</td>
                 <td className={`px-4 py-3 text-right font-bold ${item.stok_sekarang <= item.minimal_stok ? 'text-red-600' : 'text-green-600'}`}>
-                  {item.stok_sekarang || 0}
+                  {formatNumber(item.stok_sekarang || 0)}
                 </td>
-                <td className="px-4 py-3 text-right text-sm text-gray-700">{item.minimal_stok}</td>
+                <td className="px-4 py-3 text-right text-sm text-gray-700">{formatNumber(item.minimal_stok)}</td>
                 <td className="px-4 py-3 text-right">
                   <button onClick={() => setModal({ open: true, mode: 'edit', data: item })} className="text-blue-600 hover:underline mr-3">Edit</button>
                   <button onClick={() => handleDelete(item.id)} className="text-red-600 hover:underline">Hapus</button>

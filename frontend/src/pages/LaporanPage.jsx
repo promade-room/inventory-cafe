@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { getLaporanStok, getLaporanExpired, getLaporanMovement } from '../services/api';
+import { formatRupiah, formatDate, formatNumber } from '../utils/format';
 
 export default function LaporanPage() {
   const [activeTab, setActiveTab] = useState('stok');
@@ -63,10 +64,10 @@ export default function LaporanPage() {
                       <td className="px-4 py-3 text-sm font-mono">{item.kode}</td>
                       <td className="px-4 py-3 text-sm font-medium">{item.nama}</td>
                       <td className="px-4 py-3 text-sm">{item.kategori_nama || '-'}</td>
-                      <td className="px-4 py-3 text-right">{item.total_masuk || 0}</td>
-                      <td className="px-4 py-3 text-right">{item.total_keluar || 0}</td>
-                      <td className="px-4 py-3 text-right font-bold">{item.stok_sekarang || 0}</td>
-                      <td className="px-4 py-3 text-right">Rp {(item.total_nilai || 0).toLocaleString('id-ID')}</td>
+                      <td className="px-4 py-3 text-right">{formatNumber(item.total_masuk || 0)}</td>
+                      <td className="px-4 py-3 text-right">{formatNumber(item.total_keluar || 0)}</td>
+                      <td className="px-4 py-3 text-right font-bold">{formatNumber(item.stok_sekarang || 0)}</td>
+                      <td className="px-4 py-3 text-right">{formatRupiah(item.total_nilai || 0)}</td>
                     </tr>
                   ))}
                 </tbody>
@@ -91,8 +92,8 @@ export default function LaporanPage() {
                     <tr key={item.id} className="hover:bg-orange-100">
                       <td className="px-4 py-3 text-sm font-medium">{item.barang_nama}</td>
                       <td className="px-4 py-3 text-sm font-mono">{item.batch_number}</td>
-                      <td className="px-4 py-3 text-right">{item.sisa || 0}</td>
-                      <td className="px-4 py-3 text-sm">{item.tanggal_kadaluarsa}</td>
+                      <td className="px-4 py-3 text-right">{formatNumber(item.sisa || 0)}</td>
+                      <td className="px-4 py-3 text-sm">{formatDate(item.tanggal_kadaluarsa)}</td>
                       <td className="px-4 py-3">
                         <span className={`px-2 py-1 rounded text-xs font-medium ${item.hari_expired <= 0 ? 'bg-red-100 text-red-700' : item.hari_expired <= 7 ? 'bg-orange-100 text-orange-700' : 'bg-yellow-100 text-yellow-700'}`}>
                           {item.hari_expired <= 0 ? 'Expired' : `${item.hari_expired} hari`}
@@ -114,7 +115,7 @@ export default function LaporanPage() {
                   {movement.top_keluar.map((item, idx) => (
                     <div key={idx} className="flex justify-between items-center">
                       <span className="text-sm">{idx + 1}. {item.nama}</span>
-                      <span className="font-bold text-primary">{item.total_keluar}</span>
+                      <span className="font-bold text-primary">{formatNumber(item.total_keluar)}</span>
                     </div>
                   ))}
                 </div>
