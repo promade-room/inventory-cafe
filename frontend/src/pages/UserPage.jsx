@@ -47,12 +47,12 @@ export default function UserPage() {
         <table className="w-full">
           <thead className="bg-slate-700">
             <tr>
-              <th className="px-6 py-3 text-left text-sm font-medium text-gray-200">ID</th>
-              <th className="px-6 py-3 text-left text-sm font-medium text-gray-200">Username</th>
-              <th className="px-6 py-3 text-left text-sm font-medium text-gray-200">Nama Lengkap</th>
-              <th className="px-6 py-3 text-left text-sm font-medium text-gray-200">Role</th>
-              <th className="px-6 py-3 text-left text-sm font-medium text-gray-200">Dibuat</th>
-              <th className="px-6 py-3 text-right text-sm font-medium text-gray-200">Aksi</th>
+              <th className="px-6 py-3 text-left text-sm font-medium text-gray-700">ID</th>
+              <th className="px-6 py-3 text-left text-sm font-medium text-gray-700">Username</th>
+              <th className="px-6 py-3 text-left text-sm font-medium text-gray-700">Nama Lengkap</th>
+              <th className="px-6 py-3 text-left text-sm font-medium text-gray-700">Role</th>
+              <th className="px-6 py-3 text-left text-sm font-medium text-gray-700">Dibuat</th>
+              <th className="px-6 py-3 text-right text-sm font-medium text-gray-700">Aksi</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-200">
@@ -70,7 +70,7 @@ export default function UserPage() {
                     {item.role}
                   </span>
                 </td>
-                <td className="px-6 py-4 text-sm text-gray-200">{item.created_at?.slice(0,10)}</td>
+                <td className="px-6 py-4 text-sm text-gray-700">{item.created_at?.slice(0,10)}</td>
                 <td className="px-6 py-4 text-right">
                   <button onClick={() => setModal({ open: true, mode: 'edit', data: item })} className="text-blue-600 hover:underline mr-3">Edit</button>
                   <button onClick={() => handleDelete(item.id)} className="text-red-600 hover:underline">Hapus</button>

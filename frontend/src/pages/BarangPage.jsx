@@ -70,13 +70,13 @@ export default function BarangPage() {
         <table className="w-full">
           <thead className="bg-slate-700">
             <tr>
-              <th className="px-4 py-3 text-left text-sm font-medium text-gray-200">Kode</th>
-              <th className="px-4 py-3 text-left text-sm font-medium text-gray-200">Nama</th>
-              <th className="px-4 py-3 text-left text-sm font-medium text-gray-200">Kategori</th>
-              <th className="px-4 py-3 text-left text-sm font-medium text-gray-200">Satuan</th>
-              <th className="px-4 py-3 text-right text-sm font-medium text-gray-200">Stok</th>
-              <th className="px-4 py-3 text-right text-sm font-medium text-gray-200">Min</th>
-              <th className="px-4 py-3 text-right text-sm font-medium text-gray-200">Aksi</th>
+              <th className="px-4 py-3 text-left text-sm font-medium text-gray-700">Kode</th>
+              <th className="px-4 py-3 text-left text-sm font-medium text-gray-700">Nama</th>
+              <th className="px-4 py-3 text-left text-sm font-medium text-gray-700">Kategori</th>
+              <th className="px-4 py-3 text-left text-sm font-medium text-gray-700">Satuan</th>
+              <th className="px-4 py-3 text-right text-sm font-medium text-gray-700">Stok</th>
+              <th className="px-4 py-3 text-right text-sm font-medium text-gray-700">Min</th>
+              <th className="px-4 py-3 text-right text-sm font-medium text-gray-700">Aksi</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-200">
@@ -89,7 +89,7 @@ export default function BarangPage() {
                 <td className={`px-4 py-3 text-right font-bold ${item.stok_sekarang <= item.minimal_stok ? 'text-red-600' : 'text-green-600'}`}>
                   {item.stok_sekarang || 0}
                 </td>
-                <td className="px-4 py-3 text-right text-sm text-gray-200">{item.minimal_stok}</td>
+                <td className="px-4 py-3 text-right text-sm text-gray-700">{item.minimal_stok}</td>
                 <td className="px-4 py-3 text-right">
                   <button onClick={() => setModal({ open: true, mode: 'edit', data: item })} className="text-blue-600 hover:underline mr-3">Edit</button>
                   <button onClick={() => handleDelete(item.id)} className="text-red-600 hover:underline">Hapus</button>
@@ -98,7 +98,7 @@ export default function BarangPage() {
             ))}
           </tbody>
         </table>
-        {data.length === 0 && <p className="text-center py-8 text-gray-200">Tidak ada data</p>}
+        {data.length === 0 && <p className="text-center py-8 text-gray-700">Tidak ada data</p>}
       </div>
 
       {modal.open && (

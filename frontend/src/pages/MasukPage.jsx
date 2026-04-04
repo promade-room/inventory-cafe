@@ -59,15 +59,15 @@ export default function MasukPage() {
         <table className="w-full">
           <thead className="bg-slate-700">
             <tr>
-              <th className="px-4 py-3 text-left text-sm font-medium text-gray-200">Tanggal</th>
-              <th className="px-4 py-3 text-left text-sm font-medium text-gray-200">Kode</th>
-              <th className="px-4 py-3 text-left text-sm font-medium text-gray-200">Barang</th>
-              <th className="px-4 py-3 text-left text-sm font-medium text-gray-200">Supplier</th>
-              <th className="px-4 py-3 text-right text-sm font-medium text-gray-200">Jumlah</th>
-              <th className="px-4 py-3 text-right text-sm font-medium text-gray-200">Harga</th>
-              <th className="px-4 py-3 text-left text-sm font-medium text-gray-200">Batch</th>
-              <th className="px-4 py-3 text-left text-sm font-medium text-gray-200">Exp</th>
-              <th className="px-4 py-3 text-right text-sm font-medium text-gray-200">Aksi</th>
+              <th className="px-4 py-3 text-left text-sm font-medium text-gray-700">Tanggal</th>
+              <th className="px-4 py-3 text-left text-sm font-medium text-gray-700">Kode</th>
+              <th className="px-4 py-3 text-left text-sm font-medium text-gray-700">Barang</th>
+              <th className="px-4 py-3 text-left text-sm font-medium text-gray-700">Supplier</th>
+              <th className="px-4 py-3 text-right text-sm font-medium text-gray-700">Jumlah</th>
+              <th className="px-4 py-3 text-right text-sm font-medium text-gray-700">Harga</th>
+              <th className="px-4 py-3 text-left text-sm font-medium text-gray-700">Batch</th>
+              <th className="px-4 py-3 text-left text-sm font-medium text-gray-700">Exp</th>
+              <th className="px-4 py-3 text-right text-sm font-medium text-gray-700">Aksi</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-200">
@@ -79,7 +79,7 @@ export default function MasukPage() {
                 <td className="px-4 py-3 text-sm">{item.supplier_nama || '-'}</td>
                 <td className="px-4 py-3 text-right font-medium">{item.jumlah}</td>
                 <td className="px-4 py-3 text-right">Rp {parseFloat(item.harga_satuan).toLocaleString('id-ID')}</td>
-                <td className="px-4 py-3 text-sm font-mono text-gray-200">{item.batch_number}</td>
+                <td className="px-4 py-3 text-sm font-mono text-gray-700">{item.batch_number}</td>
                 <td className="px-4 py-3 text-sm">{item.tanggal_kadaluarsa || '-'}</td>
                 <td className="px-4 py-3 text-right">
                   <button onClick={() => handleDelete(item.id)} className="text-red-600 hover:underline">Hapus</button>
@@ -88,7 +88,7 @@ export default function MasukPage() {
             ))}
           </tbody>
         </table>
-        {data.length === 0 && <p className="text-center py-8 text-gray-200">Tidak ada data</p>}
+        {data.length === 0 && <p className="text-center py-8 text-gray-700">Tidak ada data</p>}
       </div>
 
       {modal && (

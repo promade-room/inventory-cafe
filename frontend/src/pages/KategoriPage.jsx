@@ -49,11 +49,11 @@ export default function KategoriPage() {
         <table className="w-full">
           <thead className="bg-slate-700">
             <tr>
-              <th className="px-6 py-3 text-left text-sm font-medium text-gray-200">ID</th>
-              <th className="px-6 py-3 text-left text-sm font-medium text-gray-200">Nama</th>
-              <th className="px-6 py-3 text-left text-sm font-medium text-gray-200">Icon</th>
-              <th className="px-6 py-3 text-left text-sm font-medium text-gray-200">Warna</th>
-              <th className="px-6 py-3 text-right text-sm font-medium text-gray-200">Aksi</th>
+              <th className="px-6 py-3 text-left text-sm font-medium text-gray-700">ID</th>
+              <th className="px-6 py-3 text-left text-sm font-medium text-gray-700">Nama</th>
+              <th className="px-6 py-3 text-left text-sm font-medium text-gray-700">Icon</th>
+              <th className="px-6 py-3 text-left text-sm font-medium text-gray-700">Warna</th>
+              <th className="px-6 py-3 text-right text-sm font-medium text-gray-700">Aksi</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-200">

@@ -48,13 +48,13 @@ export default function LaporanPage() {
               <table className="w-full">
                 <thead className="bg-slate-700">
                   <tr>
-                    <th className="px-4 py-3 text-left text-sm font-medium text-gray-200">Kode</th>
-                    <th className="px-4 py-3 text-left text-sm font-medium text-gray-200">Nama</th>
-                    <th className="px-4 py-3 text-left text-sm font-medium text-gray-200">Kat</th>
-                    <th className="px-4 py-3 text-right text-sm font-medium text-gray-200">Masuk</th>
-                    <th className="px-4 py-3 text-right text-sm font-medium text-gray-200">Keluar</th>
-                    <th className="px-4 py-3 text-right text-sm font-medium text-gray-200">Stok</th>
-                    <th className="px-4 py-3 text-right text-sm font-medium text-gray-200">Nilai</th>
+                    <th className="px-4 py-3 text-left text-sm font-medium text-gray-700">Kode</th>
+                    <th className="px-4 py-3 text-left text-sm font-medium text-gray-700">Nama</th>
+                    <th className="px-4 py-3 text-left text-sm font-medium text-gray-700">Kat</th>
+                    <th className="px-4 py-3 text-right text-sm font-medium text-gray-700">Masuk</th>
+                    <th className="px-4 py-3 text-right text-sm font-medium text-gray-700">Keluar</th>
+                    <th className="px-4 py-3 text-right text-sm font-medium text-gray-700">Stok</th>
+                    <th className="px-4 py-3 text-right text-sm font-medium text-gray-700">Nilai</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-200">
@@ -79,11 +79,11 @@ export default function LaporanPage() {
               <table className="w-full">
                 <thead className="bg-slate-700">
                   <tr>
-                    <th className="px-4 py-3 text-left text-sm font-medium text-gray-200">Barang</th>
-                    <th className="px-4 py-3 text-left text-sm font-medium text-gray-200">Batch</th>
-                    <th className="px-4 py-3 text-right text-sm font-medium text-gray-200">Sisa</th>
-                    <th className="px-4 py-3 text-left text-sm font-medium text-gray-200">Tgl Expired</th>
-                    <th className="px-4 py-3 text-left text-sm font-medium text-gray-200">Status</th>
+                    <th className="px-4 py-3 text-left text-sm font-medium text-gray-700">Barang</th>
+                    <th className="px-4 py-3 text-left text-sm font-medium text-gray-700">Batch</th>
+                    <th className="px-4 py-3 text-right text-sm font-medium text-gray-700">Sisa</th>
+                    <th className="px-4 py-3 text-left text-sm font-medium text-gray-700">Tgl Expired</th>
+                    <th className="px-4 py-3 text-left text-sm font-medium text-gray-700">Status</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-200">
@@ -102,7 +102,7 @@ export default function LaporanPage() {
                   ))}
                 </tbody>
               </table>
-              {expired.length === 0 && <p className="text-center py-8 text-gray-200">Tidak ada barang expired</p>}
+              {expired.length === 0 && <p className="text-center py-8 text-gray-700">Tidak ada barang expired</p>}
             </div>
           )}
 
@@ -119,7 +119,7 @@ export default function LaporanPage() {
                   ))}
                 </div>
               </div>
-              <p className="text-gray-200 text-sm">Grafik movement bisa ditambahkan dengan library chart.js</p>
+              <p className="text-gray-700 text-sm">Grafik movement bisa ditambahkan dengan library chart.js</p>
             </div>
           )}
         </>
