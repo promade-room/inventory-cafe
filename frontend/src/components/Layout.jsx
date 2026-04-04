@@ -35,7 +35,7 @@ export default function Layout() {
       {/* Sidebar */}
       <aside className="w-64 bg-gradient-to-b from-slate-700 to-slate-800 text-white flex flex-col fixed h-full">
         <div className="p-6 border-b border-slate-600">
-          <h1 className="text-xl font-bold">☕ Inventory Cafe</h1>
+          <h1 className="text-xl font-bold">☕ Andung Cafe</h1>
           <p className="text-xs text-slate-400 mt-1">Sistem Informasi Inventory</p>
         </div>
 
