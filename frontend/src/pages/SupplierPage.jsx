@@ -47,9 +47,9 @@ export default function SupplierPage() {
         {data.map((item) => (
           <div key={item.id} className="bg-white rounded-xl shadow-sm p-5">
             <h3 className="font-semibold text-lg text-gray-800">{item.nama}</h3>
-            <p className="text-sm text-gray-700 mt-1">📍 {item.alamat || '-'}</p>
-            <p className="text-sm text-gray-700">📞 {item.telepon || '-'}</p>
-            <p className="text-sm text-gray-700">✉️ {item.email || '-'}</p>
+            <p className="text-sm text-white mt-1">📍 {item.alamat || '-'}</p>
+            <p className="text-sm text-gray-800">📞 {item.telepon || '-'}</p>
+            <p className="text-sm text-gray-800">✉️ {item.email || '-'}</p>
             {item.catatan && <p className="text-sm text-gray-400 mt-2 italic">"{item.catatan}"</p>}
             <div className="flex gap-2 mt-4 pt-4 border-t">
               <button onClick={() => setModal({ open: true, mode: 'edit', data: item })} className="flex-1 text-blue-600 py-2 rounded border hover:bg-blue-50">Edit</button>
@@ -57,7 +57,7 @@ export default function SupplierPage() {
             </div>
           </div>
         ))}
-        {data.length === 0 && <p className="text-gray-700 col-span-full text-center py-8">Tidak ada data</p>}
+        {data.length === 0 && <p className="text-white col-span-full text-center py-8">Tidak ada data</p>}
       </div>
 
       {modal.open && (

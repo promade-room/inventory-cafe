@@ -34,7 +34,12 @@ export default function Dashboard() {
 
   return (
     <div>
-      <h1 className="text-2xl font-bold text-gray-800 mb-6">Dashboard</h1>
+      <div className="flex justify-between items-center mb-6">
+        <h1 className="text-2xl font-bold text-gray-800">Dashboard</h1>
+        <span className="bg-amber-100 text-amber-800 px-4 py-2 rounded-lg font-medium text-sm">
+          📦 Metode FIFO (First In First Out)
+        </span>
+      </div>
 
       {/* Stats Cards */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">

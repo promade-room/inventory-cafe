@@ -37,7 +37,7 @@ export default function LaporanPage() {
         {['stok', 'expired', 'movement'].map(tab => (
           <button key={tab} onClick={() => setActiveTab(tab)}
             className={`px-4 py-2 rounded-lg font-medium ${activeTab === tab ? 'bg-primary text-white' : 'bg-white text-gray-600 hover:bg-gray-100'}`}>
-            {tab === 'stok' ? '📊 Laporan Stok' : tab === 'expired' ? '⚠️ Akan Expired' : '📈 Movement'}
+            {tab === 'stok' ? '📊 Laporan Stok' : tab === 'expired' ? '⚠️ Akan Expired (30 Hari)' : '📈 Movement'}
           </button>
         ))}
       </div>
@@ -47,15 +47,15 @@ export default function LaporanPage() {
           {activeTab === 'stok' && (
             <div className="bg-white rounded-xl shadow-sm overflow-hidden">
               <table className="w-full">
-                <thead className="bg-slate-700">
+                <th className="px-4 py-3 text-left text-sm font-medium text-gray-800"> className="bg-slate-700">
                   <tr>
-                    <th className="px-4 py-3 text-left text-sm font-medium text-white">Kode</th>
-                    <th className="px-4 py-3 text-left text-sm font-medium text-white">Nama</th>
-                    <th className="px-4 py-3 text-left text-sm font-medium text-white">Kat</th>
-                    <th className="px-4 py-3 text-right text-sm font-medium text-white">Masuk</th>
-                    <th className="px-4 py-3 text-right text-sm font-medium text-white">Keluar</th>
-                    <th className="px-4 py-3 text-right text-sm font-medium text-white">Stok</th>
-                    <th className="px-4 py-3 text-right text-sm font-medium text-white">Nilai</th>
+                    <th className="px-4 py-3 text-left text-sm font-medium text-white" className="px-4 py-3 text-left text-sm font-medium text-gray-800">Kode</th>
+                    <th className="px-4 py-3 text-left text-sm font-medium text-white" className="px-4 py-3 text-left text-sm font-medium text-gray-800">Nama</th>
+                    <th className="px-4 py-3 text-left text-sm font-medium text-white" className="px-4 py-3 text-left text-sm font-medium text-gray-800">Kat</th>
+                    <th className="px-4 py-3 text-left text-sm font-medium text-white" className="px-4 py-3 text-right text-sm font-medium text-gray-800">Masuk</th>
+                    <th className="px-4 py-3 text-left text-sm font-medium text-white" className="px-4 py-3 text-right text-sm font-medium text-gray-800">Keluar</th>
+                    <th className="px-4 py-3 text-left text-sm font-medium text-white" className="px-4 py-3 text-right text-sm font-medium text-gray-800">Stok</th>
+                    <th className="px-4 py-3 text-left text-sm font-medium text-white" className="px-4 py-3 text-right text-sm font-medium text-gray-800">Nilai</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-200">
@@ -78,13 +78,13 @@ export default function LaporanPage() {
           {activeTab === 'expired' && (
             <div className="bg-white rounded-xl shadow-sm overflow-hidden">
               <table className="w-full">
-                <thead className="bg-slate-700">
+                <th className="px-4 py-3 text-left text-sm font-medium text-gray-800"> className="bg-slate-700">
                   <tr>
-                    <th className="px-4 py-3 text-left text-sm font-medium text-white">Barang</th>
-                    <th className="px-4 py-3 text-left text-sm font-medium text-white">Batch</th>
-                    <th className="px-4 py-3 text-right text-sm font-medium text-white">Sisa</th>
-                    <th className="px-4 py-3 text-left text-sm font-medium text-white">Tgl Expired</th>
-                    <th className="px-4 py-3 text-left text-sm font-medium text-white">Status</th>
+                    <th className="px-4 py-3 text-left text-sm font-medium text-white" className="px-4 py-3 text-left text-sm font-medium text-gray-800">Barang</th>
+                    <th className="px-4 py-3 text-left text-sm font-medium text-white" className="px-4 py-3 text-left text-sm font-medium text-gray-800">Batch</th>
+                    <th className="px-4 py-3 text-left text-sm font-medium text-white" className="px-4 py-3 text-right text-sm font-medium text-gray-800">Sisa</th>
+                    <th className="px-4 py-3 text-left text-sm font-medium text-white" className="px-4 py-3 text-left text-sm font-medium text-gray-800">Tgl Expired</th>
+                    <th className="px-4 py-3 text-left text-sm font-medium text-white" className="px-4 py-3 text-left text-sm font-medium text-gray-800">Status</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-200">
@@ -103,23 +103,31 @@ export default function LaporanPage() {
                   ))}
                 </tbody>
               </table>
-              {expired.length === 0 && <p className="text-center py-8 text-gray-700">Tidak ada barang expired</p>}
+              {expired.length === 0 && <p className="text-center py-8 text-gray-800">Tidak ada barang expired</p>}
             </div>
           )}
 
           {activeTab === 'movement' && movement && (
-            <div className="space-y-6">
-              <div className="bg-white rounded-xl shadow-sm p-6">
-                <h3 className="font-semibold mb-4">Top 10 Barang Paling Banyak Keluar</h3>
-                <div className="space-y-2">
+            <div className="bg-white rounded-xl shadow-sm overflow-hidden">
+              <table className="w-full">
+                <th className="px-4 py-3 text-left text-sm font-medium text-gray-800"> className="bg-slate-700">
+                  <tr>
+                    <th className="px-4 py-3 text-left text-sm font-medium text-white" className="px-4 py-3 text-left text-sm font-medium text-gray-800">No</th>
+                    <th className="px-4 py-3 text-left text-sm font-medium text-white" className="px-4 py-3 text-left text-sm font-medium text-gray-800">Nama Barang</th>
+                    <th className="px-4 py-3 text-left text-sm font-medium text-white" className="px-4 py-3 text-right text-sm font-medium text-gray-800">Total Keluar</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-gray-200">
                   {movement.top_keluar.map((item, idx) => (
-                    <div key={idx} className="flex justify-between items-center">
-                      <span className="text-sm">{idx + 1}. {item.nama}</span>
-                      <span className="font-bold text-primary">{formatNumber(item.total_keluar)}</span>
-                    </div>
+                    <tr key={idx} className="hover:bg-orange-100">
+                      <td className="px-4 py-3 text-sm">{idx + 1}</td>
+                      <td className="px-4 py-3 text-sm font-medium">{item.nama}</td>
+                      <td className="px-4 py-3 text-right font-bold">{formatNumber(item.total_keluar)}</td>
+                    </tr>
                   ))}
-                </div>
-              </div>
+                </tbody>
+              </table>
+              {movement.top_keluar.length === 0 && <p className="text-center py-8 text-gray-800">Tidak ada data</p>}
             </div>
           )}
         </>
