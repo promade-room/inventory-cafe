@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 
 export default function Layout() {
   const [user, setUser] = useState(null);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -16,7 +17,10 @@ export default function Layout() {
     localStorage.removeItem('token');
     localStorage.removeItem('user');
     navigate('/login');
+    setSidebarOpen(false);
   };
+
+  const closeSidebar = () => setSidebarOpen(false);
 
   const navItems = [
     { path: '/', label: 'Dashboard', icon: '📊' },
@@ -32,11 +36,33 @@ export default function Layout() {
 
   return (
     <div className="flex min-h-screen bg-gray-50">
+      {/* Mobile Toggle Button */}
+      <button
+        onClick={() => setSidebarOpen(true)}
+        className="lg:hidden fixed top-4 left-4 z-50 p-2 bg-slate-700 text-white rounded-lg shadow-lg"
+      >
+        ☰
+      </button>
+
+      {/* Overlay */}
+      {sidebarOpen && (
+        <div
+          className="lg:hidden fixed inset-0 bg-black/50 z-40"
+          onClick={closeSidebar}
+        />
+      )}
+
       {/* Sidebar */}
-      <aside className="w-64 bg-gradient-to-b from-slate-700 to-slate-800 text-white flex flex-col fixed h-full">
-        <div className="p-6 border-b border-slate-600">
-          <h1 className="text-xl font-bold">☕ Andung Cafe</h1>
-          <p className="text-xs text-slate-400 mt-1">Sistem Informasi Inventory</p>
+      <aside className={`
+        fixed lg:static inset-y-0 left-0 z-50 w-64 bg-gradient-to-b from-slate-700 to-slate-800 text-white flex flex-col h-full transform transition-transform duration-300
+        ${sidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
+      `}>
+        <div className="p-6 border-b border-slate-600 flex items-center justify-between">
+          <div>
+            <h1 className="text-xl font-bold">☕ Andung Cafe</h1>
+            <p className="text-xs text-slate-400 mt-1">Sistem Informasi Inventory</p>
+          </div>
+          <button onClick={closeSidebar} className="lg:hidden text-white text-xl">✕</button>
         </div>
 
         <nav className="flex-1 py-4 overflow-y-auto">
@@ -44,6 +70,7 @@ export default function Layout() {
             <NavLink
               key={item.path}
               to={item.path}
+              onClick={closeSidebar}
               className={({ isActive }) =>
                 `flex items-center gap-3 px-6 py-3 hover:bg-slate-600 transition-colors ${
                   isActive ? 'bg-primary text-white border-l-4 border-orange-400' : ''
@@ -58,6 +85,7 @@ export default function Layout() {
           {isAdmin && (
             <NavLink
               to="/users"
+              onClick={closeSidebar}
               className={({ isActive }) =>
                 `flex items-center gap-3 px-6 py-3 hover:bg-slate-600 transition-colors ${
                   isActive ? 'bg-primary text-white border-l-4 border-orange-400' : ''
@@ -91,7 +119,7 @@ export default function Layout() {
       </aside>
 
       {/* Main Content */}
-      <main className="flex-1 ml-64 p-8">
+      <main className="flex-1 lg:ml-0 p-4 lg:p-8 pt-16 lg:pt-8">
         <Outlet />
       </main>
     </div>
