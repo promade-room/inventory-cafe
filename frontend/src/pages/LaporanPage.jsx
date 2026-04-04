@@ -47,15 +47,15 @@ export default function LaporanPage() {
           {activeTab === 'stok' && (
             <div className="bg-white rounded-xl shadow-sm overflow-hidden">
               <table className="w-full">
-                <th className="px-4 py-3 text-left text-sm font-medium text-gray-800"> className="bg-slate-700">
+                <th className="px-4 py-3 text-left text-sm font-medium text-gray-800">bg-slate-700">
                   <tr>
-                    <th className="px-4 py-3 text-left text-sm font-medium text-white" className="px-4 py-3 text-left text-sm font-medium text-gray-800">Kode</th>
-                    <th className="px-4 py-3 text-left text-sm font-medium text-white" className="px-4 py-3 text-left text-sm font-medium text-gray-800">Nama</th>
-                    <th className="px-4 py-3 text-left text-sm font-medium text-white" className="px-4 py-3 text-left text-sm font-medium text-gray-800">Kat</th>
-                    <th className="px-4 py-3 text-left text-sm font-medium text-white" className="px-4 py-3 text-right text-sm font-medium text-gray-800">Masuk</th>
-                    <th className="px-4 py-3 text-left text-sm font-medium text-white" className="px-4 py-3 text-right text-sm font-medium text-gray-800">Keluar</th>
-                    <th className="px-4 py-3 text-left text-sm font-medium text-white" className="px-4 py-3 text-right text-sm font-medium text-gray-800">Stok</th>
-                    <th className="px-4 py-3 text-left text-sm font-medium text-white" className="px-4 py-3 text-right text-sm font-medium text-gray-800">Nilai</th>
+                    <th className="px-4 py-3 text-left text-sm font-medium text-gray-800">Kode</th>
+                    <th className="px-4 py-3 text-left text-sm font-medium text-gray-800">Nama</th>
+                    <th className="px-4 py-3 text-left text-sm font-medium text-gray-800">Kat</th>
+                    <th className="px-4 py-3 text-right text-sm font-medium text-gray-800">Masuk</th>
+                    <th className="px-4 py-3 text-right text-sm font-medium text-gray-800">Keluar</th>
+                    <th className="px-4 py-3 text-right text-sm font-medium text-gray-800">Stok</th>
+                    <th className="px-4 py-3 text-right text-sm font-medium text-gray-800">Nilai</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-200">
@@ -78,13 +78,13 @@ export default function LaporanPage() {
           {activeTab === 'expired' && (
             <div className="bg-white rounded-xl shadow-sm overflow-hidden">
               <table className="w-full">
-                <th className="px-4 py-3 text-left text-sm font-medium text-gray-800"> className="bg-slate-700">
+                <th className="px-4 py-3 text-left text-sm font-medium text-gray-800">bg-slate-700">
                   <tr>
-                    <th className="px-4 py-3 text-left text-sm font-medium text-white" className="px-4 py-3 text-left text-sm font-medium text-gray-800">Barang</th>
-                    <th className="px-4 py-3 text-left text-sm font-medium text-white" className="px-4 py-3 text-left text-sm font-medium text-gray-800">Batch</th>
-                    <th className="px-4 py-3 text-left text-sm font-medium text-white" className="px-4 py-3 text-right text-sm font-medium text-gray-800">Sisa</th>
-                    <th className="px-4 py-3 text-left text-sm font-medium text-white" className="px-4 py-3 text-left text-sm font-medium text-gray-800">Tgl Expired</th>
-                    <th className="px-4 py-3 text-left text-sm font-medium text-white" className="px-4 py-3 text-left text-sm font-medium text-gray-800">Status</th>
+                    <th className="px-4 py-3 text-left text-sm font-medium text-gray-800">Barang</th>
+                    <th className="px-4 py-3 text-left text-sm font-medium text-gray-800">Batch</th>
+                    <th className="px-4 py-3 text-right text-sm font-medium text-gray-800">Sisa</th>
+                    <th className="px-4 py-3 text-left text-sm font-medium text-gray-800">Tgl Expired</th>
+                    <th className="px-4 py-3 text-left text-sm font-medium text-gray-800">Status</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-200">
@@ -110,11 +110,11 @@ export default function LaporanPage() {
           {activeTab === 'movement' && movement && (
             <div className="bg-white rounded-xl shadow-sm overflow-hidden">
               <table className="w-full">
-                <th className="px-4 py-3 text-left text-sm font-medium text-gray-800"> className="bg-slate-700">
+                <th className="px-4 py-3 text-left text-sm font-medium text-gray-800">bg-slate-700">
                   <tr>
-                    <th className="px-4 py-3 text-left text-sm font-medium text-white" className="px-4 py-3 text-left text-sm font-medium text-gray-800">No</th>
-                    <th className="px-4 py-3 text-left text-sm font-medium text-white" className="px-4 py-3 text-left text-sm font-medium text-gray-800">Nama Barang</th>
-                    <th className="px-4 py-3 text-left text-sm font-medium text-white" className="px-4 py-3 text-right text-sm font-medium text-gray-800">Total Keluar</th>
+                    <th className="px-4 py-3 text-left text-sm font-medium text-gray-800">No</th>
+                    <th className="px-4 py-3 text-left text-sm font-medium text-gray-800">Nama Barang</th>
+                    <th className="px-4 py-3 text-right text-sm font-medium text-gray-800">Total Keluar</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-200">

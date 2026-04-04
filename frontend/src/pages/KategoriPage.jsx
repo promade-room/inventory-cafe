@@ -47,13 +47,13 @@ export default function KategoriPage() {
 
       <div className="bg-white rounded-xl shadow-sm overflow-hidden">
         <table className="w-full">
-          <th className="px-4 py-3 text-left text-sm font-medium text-gray-800"> className="bg-slate-700">
+          <th className="px-4 py-3 text-left text-sm font-medium text-gray-800">bg-slate-700">
             <tr>
-              <th className="px-4 py-3 text-left text-sm font-medium text-white" className="px-6 py-3 text-left text-sm font-medium text-gray-800">ID</th>
-              <th className="px-4 py-3 text-left text-sm font-medium text-white" className="px-6 py-3 text-left text-sm font-medium text-gray-800">Nama</th>
-              <th className="px-4 py-3 text-left text-sm font-medium text-white" className="px-6 py-3 text-left text-sm font-medium text-gray-800">Icon</th>
-              <th className="px-4 py-3 text-left text-sm font-medium text-white" className="px-6 py-3 text-left text-sm font-medium text-gray-800">Warna</th>
-              <th className="px-4 py-3 text-left text-sm font-medium text-white" className="px-6 py-3 text-right text-sm font-medium text-gray-800">Aksi</th>
+              <th className="px-6 py-3 text-left text-sm font-medium text-gray-800">ID</th>
+              <th className="px-6 py-3 text-left text-sm font-medium text-gray-800">Nama</th>
+              <th className="px-6 py-3 text-left text-sm font-medium text-gray-800">Icon</th>
+              <th className="px-6 py-3 text-left text-sm font-medium text-gray-800">Warna</th>
+              <th className="px-6 py-3 text-right text-sm font-medium text-gray-800">Aksi</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-200">

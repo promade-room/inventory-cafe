@@ -85,15 +85,15 @@ export default function BarangPage() {
 
       <div className="bg-white rounded-xl shadow-sm overflow-hidden">
         <table className="w-full">
-          <th className="px-4 py-3 text-left text-sm font-medium text-gray-800"> className="bg-slate-700">
+          <th className="px-4 py-3 text-left text-sm font-medium text-gray-800">bg-slate-700">
             <tr>
-              <th className="px-4 py-3 text-left text-sm font-medium text-white" className="px-4 py-3 text-left text-sm font-medium text-gray-800">Kode</th>
-              <th className="px-4 py-3 text-left text-sm font-medium text-white" className="px-4 py-3 text-left text-sm font-medium text-gray-800">Nama</th>
-              <th className="px-4 py-3 text-left text-sm font-medium text-white" className="px-4 py-3 text-left text-sm font-medium text-gray-800">Kategori</th>
-              <th className="px-4 py-3 text-left text-sm font-medium text-white" className="px-4 py-3 text-left text-sm font-medium text-gray-800">Satuan</th>
-              <th className="px-4 py-3 text-left text-sm font-medium text-white" className="px-4 py-3 text-right text-sm font-medium text-gray-800">Stok</th>
-              <th className="px-4 py-3 text-left text-sm font-medium text-white" className="px-4 py-3 text-right text-sm font-medium text-gray-800">Min</th>
-              <th className="px-4 py-3 text-left text-sm font-medium text-white" className="px-4 py-3 text-right text-sm font-medium text-gray-800">Aksi</th>
+              <th className="px-4 py-3 text-left text-sm font-medium text-gray-800">Kode</th>
+              <th className="px-4 py-3 text-left text-sm font-medium text-gray-800">Nama</th>
+              <th className="px-4 py-3 text-left text-sm font-medium text-gray-800">Kategori</th>
+              <th className="px-4 py-3 text-left text-sm font-medium text-gray-800">Satuan</th>
+              <th className="px-4 py-3 text-right text-sm font-medium text-gray-800">Stok</th>
+              <th className="px-4 py-3 text-right text-sm font-medium text-gray-800">Min</th>
+              <th className="px-4 py-3 text-right text-sm font-medium text-gray-800">Aksi</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-200">
