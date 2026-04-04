@@ -62,9 +62,7 @@ router.get('/stats', auth, async (req, res) => {
     
     // Movement chart (7 hari terakhir)
     const [movementChart] = await db.query(`
-      SELECT 
-        DATE(tanggal_masuk) as tanggal,
-        (SELECT SUM(jumlah) FROM barang_masuks WHERE DATE(tanggal_masuk) = DATE(tanggal_masuk)) as masuk
+      SELECT dates.tanggal, COALESCE(SUM(bm.jumlah), 0) as masuk
       FROM (
         SELECT DATE_SUB(CURDATE(), INTERVAL n DAY) as tanggal
         FROM (SELECT 0 as n UNION SELECT 1 UNION SELECT 2 UNION SELECT 3 UNION SELECT 4 UNION SELECT 5 UNION SELECT 6) t
@@ -75,7 +73,7 @@ router.get('/stats', auth, async (req, res) => {
     `);
     
     const [keluarChart] = await db.query(`
-      SELECT DATE(tanggal_keluar) as tanggal, SUM(jumlah) as keluar
+      SELECT DATE(tanggal_keluar) as tanggal, COALESCE(SUM(jumlah), 0) as keluar
       FROM barang_keluars
       WHERE tanggal_keluar >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)
       GROUP BY DATE(tanggal_keluar)
