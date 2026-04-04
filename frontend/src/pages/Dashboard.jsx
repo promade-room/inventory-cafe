@@ -30,19 +30,19 @@ export default function Dashboard() {
       <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
         <div className="bg-white rounded-xl shadow-sm p-6 border-l-4 border-primary">
           <p className="text-gray-700 text-sm">Total Barang</p>
-          <p className="text-3xl font-bold text-gray-800">{stats?.total_barang || 0}</p>
+          <p className="text-xl font-bold text-gray-800">{stats?.total_barang || 0}</p>
         </div>
         <div className="bg-white rounded-xl shadow-sm p-6 border-l-4 border-green-500">
           <p className="text-gray-700 text-sm">Nilai Stok</p>
-          <p className="text-3xl font-bold text-gray-800">Rp {(stats?.total_nilai_stok || 0).toLocaleString('id-ID')}</p>
+          <p className="text-xl font-bold text-gray-800">Rp {(stats?.total_nilai_stok || 0).toLocaleString('id-ID')}</p>
         </div>
         <div className="bg-white rounded-xl shadow-sm p-6 border-l-4 border-blue-500">
           <p className="text-gray-700 text-sm">Masuk Hari Ini</p>
-          <p className="text-3xl font-bold text-gray-800">{stats?.masuk_hari_ini?.jumlah || 0}</p>
+          <p className="text-xl font-bold text-gray-800">{stats?.masuk_hari_ini?.jumlah || 0}</p>
         </div>
         <div className="bg-white rounded-xl shadow-sm p-6 border-l-4 border-orange-500">
           <p className="text-gray-700 text-sm">Keluar Hari Ini</p>
-          <p className="text-3xl font-bold text-gray-800">{stats?.keluar_hari_ini?.jumlah || 0}</p>
+          <p className="text-xl font-bold text-gray-800">{stats?.keluar_hari_ini?.jumlah || 0}</p>
         </div>
       </div>
 
