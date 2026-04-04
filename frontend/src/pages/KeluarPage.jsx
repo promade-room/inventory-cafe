@@ -55,12 +55,12 @@ export default function KeluarPage() {
         <table className="w-full">
           <thead className="bg-slate-700">
             <tr>
-              <th className="px-4 py-3 text-left text-sm font-medium text-gray-700">Tanggal</th>
+              <th className="px-4 py-3 text-left text-sm font-medium text-white">Tanggal</th>
               <th className="px-4 py-3 text-left text-sm font-medium text-white">Kode</th>
-              <th className="px-4 py-3 text-left text-sm font-medium text-gray-700">Barang</th>
-              <th className="px-4 py-3 text-right text-sm font-medium text-gray-700">Jumlah</th>
-              <th className="px-4 py-3 text-left text-sm font-medium text-gray-700">Keterangan</th>
-              <th className="px-4 py-3 text-left text-sm font-medium text-gray-700">User</th>
+              <th className="px-4 py-3 text-left text-sm font-medium text-white">Barang</th>
+              <th className="px-4 py-3 text-right text-sm font-medium text-white">Jumlah</th>
+              <th className="px-4 py-3 text-left text-sm font-medium text-white">Keterangan</th>
+              <th className="px-4 py-3 text-left text-sm font-medium text-white">User</th>
               <th className="px-4 py-3 text-right text-sm font-medium text-white">Aksi</th>
             </tr>
           </thead>
