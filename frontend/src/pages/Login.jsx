@@ -28,7 +28,7 @@ export default function Login() {
       <div className="bg-white rounded-2xl shadow-xl p-8 w-full max-w-md">
         <div className="text-center mb-8">
           <h1 className="text-3xl font-bold text-primary">Andung Cafe</h1>
-          <p className="text-white mt-2">Sistem Informasi Inventory</p>
+          <p className="text-gray-600 mt-2">Sistem Informasi Inventory</p>
         </div>
 
         {error && (
@@ -39,7 +39,7 @@ export default function Login() {
 
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
-            <label className="block text-white font-medium mb-2">Username</label>
+            <label className="block text-gray-800 font-medium mb-2">Username</label>
             <input
               type="text"
               className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none"
@@ -51,7 +51,7 @@ export default function Login() {
           </div>
 
           <div className="mb-6">
-            <label className="block text-white font-medium mb-2">Password</label>
+            <label className="block text-gray-800 font-medium mb-2">Password</label>
             <input
               type="password"
               className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none"
