@@ -31,6 +31,7 @@ export default function Layout() {
     { path: '/keluar', label: 'Barang Keluar', icon: '📤' },
     { path: '/laporan', label: 'Laporan', icon: '📋' },
     { path: '/settings', label: 'Pengaturan', icon: '⚙️' },
+    { path: '/settings', label: 'Pengaturan', icon: '⚙️' },
   ];
 
   const isAdmin = user?.role === 'admin';

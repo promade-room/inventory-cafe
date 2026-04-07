@@ -33,14 +33,6 @@ export default function BarangPage() {
     } catch (err) { console.error(err); }
   };
 
-  const getStatusColor = (batch) => {
-    if (!batch.tanggal_kadaluarsa) return 'bg-green-100 text-green-700';
-    const hari = Math.ceil((new Date(batch.tanggal_kadaluarsa) - new Date()) / (1000 * 60 * 60 * 24));
-    if (hari <= 0) return 'bg-red-100 text-red-700';
-    if (hari <= 7) return 'bg-yellow-100 text-yellow-700';
-    return 'bg-green-100 text-green-700';
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
@@ -61,6 +53,14 @@ export default function BarangPage() {
     catch (err) { alert(err.response?.data?.message || 'Error'); }
   };
 
+  const getStatusColor = (batch) => {
+    if (!batch.tanggal_kadaluarsa) return 'bg-green-100 text-green-700';
+    const hari = Math.ceil((new Date(batch.tanggal_kadaluarsa) - new Date()) / (1000 * 60 * 60 * 24));
+    if (hari <= 0) return 'bg-red-100 text-red-700';
+    if (hari <= 7) return 'bg-yellow-100 text-yellow-700';
+    return 'bg-green-100 text-green-700';
+  };
+
   if (loading) return <div>Loading...</div>;
 
   return (
@@ -72,7 +72,6 @@ export default function BarangPage() {
         </button>
       </div>
 
-      {/* Filter */}
       <div className="flex gap-4 mb-6">
         <input placeholder="Cari kode/nama..." className="border rounded-lg px-4 py-2 flex-1"
           value={filter.search} onChange={(e) => setFilter({ ...filter, search: e.target.value })} />
@@ -85,15 +84,15 @@ export default function BarangPage() {
 
       <div className="bg-white rounded-xl shadow-sm overflow-hidden">
         <table className="w-full">
-          <th className="px-4 py-3 text-left text-sm font-medium text-gray-800">bg-slate-700">
+          <thead className="bg-slate-700">
             <tr>
-              <th className="px-4 py-3 text-left text-sm font-medium text-gray-800">Kode</th>
-              <th className="px-4 py-3 text-left text-sm font-medium text-gray-800">Nama</th>
-              <th className="px-4 py-3 text-left text-sm font-medium text-gray-800">Kategori</th>
-              <th className="px-4 py-3 text-left text-sm font-medium text-gray-800">Satuan</th>
-              <th className="px-4 py-3 text-right text-sm font-medium text-gray-800">Stok</th>
-              <th className="px-4 py-3 text-right text-sm font-medium text-gray-800">Min</th>
-              <th className="px-4 py-3 text-right text-sm font-medium text-gray-800">Aksi</th>
+              <th className="px-4 py-3 text-left text-sm font-medium text-white">Kode</th>
+              <th className="px-4 py-3 text-left text-sm font-medium text-white">Nama</th>
+              <th className="px-4 py-3 text-left text-sm font-medium text-white">Kategori</th>
+              <th className="px-4 py-3 text-left text-sm font-medium text-white">Satuan</th>
+              <th className="px-4 py-3 text-right text-sm font-medium text-white">Stok</th>
+              <th className="px-4 py-3 text-right text-sm font-medium text-white">Min</th>
+              <th className="px-4 py-3 text-right text-sm font-medium text-white">Aksi</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-200">
@@ -152,7 +151,6 @@ export default function BarangPage() {
         </div>
       )}
 
-      {/* Detail Batch Modal */}
       {detailModal.open && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
           <div className="bg-white rounded-xl p-6 w-full max-w-2xl max-h-[80vh] overflow-y-auto">
@@ -160,12 +158,10 @@ export default function BarangPage() {
               <h2 className="text-xl font-bold">Detail Batch - {detailModal.barang?.nama}</h2>
               <button onClick={() => setDetailModal({ open: false, barang: null, batches: [] })} className="text-gray-500 hover:text-gray-700 text-xl">✕</button>
             </div>
-            
             <div className="mb-4">
               <p className="text-sm text-gray-700">Kode: <span className="font-medium">{detailModal.barang?.kode}</span></p>
               <p className="text-sm text-gray-700">Stok Total: <span className="font-bold text-green-600">{formatNumber(detailModal.barang?.stok_sekarang || 0)} {detailModal.barang?.satuan}</span></p>
             </div>
-
             <table className="w-full">
               <thead className="bg-slate-700">
                 <tr>

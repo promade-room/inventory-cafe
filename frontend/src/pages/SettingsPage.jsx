@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { getMe } from '../services/api';
 
 export default function SettingsPage() {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem('user') || '{}'));
