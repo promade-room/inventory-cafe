@@ -6,23 +6,25 @@ const db = require('../config/database');
 // GET laporan stok
 router.get('/stok', auth, async (req, res) => {
   try {
-    const { bulan = null } = req.query; // format: 2026-01
+    const { bulan = null } = req.query;
     
-    let dateFilter = '';
+    let masukFilter = '';
+    let keluarFilter = '';
     if (bulan) {
       const [year, month] = bulan.split('-');
-      dateFilter = `AND MONTH(bm.tanggal_masuk) = ${parseInt(month)} AND YEAR(bm.tanggal_masuk) = ${parseInt(year)}`;
+      masukFilter = `AND MONTH(tanggal_masuk) = ${parseInt(month)} AND YEAR(tanggal_masuk) = ${parseInt(year)}`;
+      keluarFilter = `AND MONTH(tanggal_keluar) = ${parseInt(month)} AND YEAR(tanggal_keluar) = ${parseInt(year)}`;
     }
     
     let query = `
       SELECT 
         b.id, b.kode, b.nama, b.satuan, b.minimal_stok,
         k.nama as kategori_nama,
-        COALESCE((SELECT SUM(bm.jumlah) FROM barang_masuks bm WHERE bm.barang_id = b.id ${dateFilter}), 0) as total_masuk,
-        COALESCE((SELECT SUM(bk.jumlah) FROM barang_keluars bk WHERE bk.barang_id = b.id ${dateFilter.replace('bm.tanggal_masuk', 'bk.tanggal_keluar')}), 0) as total_keluar,
-        COALESCE((SELECT SUM(bm.jumlah) FROM barang_masuks bm WHERE bm.barang_id = b.id), 0) -
-        COALESCE((SELECT SUM(bk.jumlah) FROM barang_keluars bk WHERE bk.barang_id = b.id), 0) as stok_sekarang,
-        COALESCE((SELECT AVG(bm.harga_satuan) FROM barang_masuks bm WHERE bm.barang_id = b.id), 0) as avg_harga
+        COALESCE((SELECT SUM(jumlah) FROM barang_masuks WHERE barang_id = b.id ${masukFilter}), 0) as total_masuk,
+        COALESCE((SELECT SUM(jumlah) FROM barang_keluars WHERE barang_id = b.id ${keluarFilter}), 0) as total_keluar,
+        COALESCE((SELECT SUM(jumlah) FROM barang_masuks WHERE barang_id = b.id), 0) -
+        COALESCE((SELECT SUM(jumlah) FROM barang_keluars WHERE barang_id = b.id), 0) as stok_sekarang,
+        COALESCE((SELECT AVG(harga_satuan) FROM barang_masuks WHERE barang_id = b.id), 0) as avg_harga
       FROM barangs b
       LEFT JOIN kategoris k ON b.kategori_id = k.id
       ORDER BY b.nama ASC
