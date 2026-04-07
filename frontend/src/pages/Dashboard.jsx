@@ -44,20 +44,20 @@ export default function Dashboard() {
       {/* Stats Cards */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
         <div className="bg-white rounded-xl shadow-sm p-6 border-l-4 border-primary">
-          <p className="text-white text-sm">Total Barang</p>
-          <p className="text-3xl font-bold text-gray-800">{formatNumber(stats?.total_barang || 0)}</p>
+          <p className="text-gray-400 text-sm">Total Barang</p>
+          <p className="text-2xl font-bold text-gray-800">{formatNumber(stats?.total_barang || 0)}</p>
         </div>
         <div className="bg-white rounded-xl shadow-sm p-6 border-l-4 border-green-500">
-          <p className="text-white text-sm">Nilai Stok</p>
-          <p className="text-3xl font-bold text-gray-800">{formatRupiah(stats?.total_nilai_stok || 0)}</p>
+          <p className="text-gray-400 text-sm">Nilai Stok</p>
+          <p className="text-2xl font-bold text-gray-800">{formatRupiah(stats?.total_nilai_stok || 0)}</p>
         </div>
         <div className="bg-white rounded-xl shadow-sm p-6 border-l-4 border-blue-500">
-          <p className="text-white text-sm">Masuk Hari Ini</p>
-          <p className="text-3xl font-bold text-gray-800">{formatNumber(stats?.masuk_hari_ini?.jumlah || 0)}</p>
+          <p className="text-gray-400 text-sm">Masuk Hari Ini</p>
+          <p className="text-2xl font-bold text-gray-800">{formatNumber(stats?.masuk_hari_ini?.jumlah || 0)}</p>
         </div>
         <div className="bg-white rounded-xl shadow-sm p-6 border-l-4 border-orange-500">
-          <p className="text-white text-sm">Keluar Hari Ini</p>
-          <p className="text-3xl font-bold text-gray-800">{formatNumber(stats?.keluar_hari_ini?.jumlah || 0)}</p>
+          <p className="text-gray-400 text-sm">Keluar Hari Ini</p>
+          <p className="text-2xl font-bold text-gray-800">{formatNumber(stats?.keluar_hari_ini?.jumlah || 0)}</p>
         </div>
       </div>
 
