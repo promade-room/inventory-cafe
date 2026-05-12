@@ -27,6 +27,14 @@ app.get('/api/health', (req, res) => {
   res.json({ status: 'ok', timestamp: new Date().toISOString() });
 });
 
+// Serve static files from frontend/dist
+app.use(express.static(path.join(__dirname, '../../frontend/dist')));
+
+// Handle SPA routing - send all other requests to index.html
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../../frontend/dist/index.html'));
+});
+
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
