@@ -1,5 +1,4 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import { useState, useEffect } from 'react';
 import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
 import Layout from './components/Layout';
@@ -10,6 +9,7 @@ import MasukPage from './pages/MasukPage';
 import KeluarPage from './pages/KeluarPage';
 import LaporanPage from './pages/LaporanPage';
 import UserPage from './pages/UserPage';
+import SettingsPage from './pages/SettingsPage';
 
 function PrivateRoute({ children }) {
   const token = localStorage.getItem('token');
@@ -34,6 +34,7 @@ function App() {
           <Route path="keluar" element={<KeluarPage />} />
           <Route path="laporan" element={<LaporanPage />} />
           <Route path="users" element={<UserPage />} />
+          <Route path="settings" element={<SettingsPage />} />
         </Route>
       </Routes>
     </Router>

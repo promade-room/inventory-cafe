@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-import { getBarangs, getKategoris, createBarang, updateBarang, deleteBarang } from '../services/api';
-import { formatNumber } from '../utils/format';
+import { getBarangs, getKategoris, createBarang, updateBarang, deleteBarang, getBarang } from '../services/api';
+import { formatNumber, formatDate } from '../utils/format';
 
 export default function BarangPage() {
   const [data, setData] = useState([]);
@@ -8,6 +8,7 @@ export default function BarangPage() {
   const [loading, setLoading] = useState(true);
   const [modal, setModal] = useState({ open: false, mode: 'add', data: null });
   const [filter, setFilter] = useState({ search: '', kategori_id: '' });
+  const [detailModal, setDetailModal] = useState({ open: false, barang: null, batches: [] });
 
   useEffect(() => { loadData(); loadKategori(); }, []);
   useEffect(() => { loadData(); }, [filter]);
@@ -23,6 +24,13 @@ export default function BarangPage() {
   const loadKategori = async () => {
     try { const { data } = await getKategoris(); setKategori(data); }
     catch (err) { console.error(err); }
+  };
+
+  const handleViewDetail = async (barang) => {
+    try {
+      const { data } = await getBarang(barang.id);
+      setDetailModal({ open: true, barang, batches: data.batches || [] });
+    } catch (err) { console.error(err); }
   };
 
   const handleSubmit = async (e) => {
@@ -45,6 +53,14 @@ export default function BarangPage() {
     catch (err) { alert(err.response?.data?.message || 'Error'); }
   };
 
+  const getStatusColor = (batch) => {
+    if (!batch.tanggal_kadaluarsa) return 'bg-green-100 text-green-700';
+    const hari = Math.ceil((new Date(batch.tanggal_kadaluarsa) - new Date()) / (1000 * 60 * 60 * 24));
+    if (hari <= 0) return 'bg-red-100 text-red-700';
+    if (hari <= 7) return 'bg-yellow-100 text-yellow-700';
+    return 'bg-green-100 text-green-700';
+  };
+
   if (loading) return <div>Loading...</div>;
 
   return (
@@ -56,7 +72,6 @@ export default function BarangPage() {
         </button>
       </div>
 
-      {/* Filter */}
       <div className="flex gap-4 mb-6">
         <input placeholder="Cari kode/nama..." className="border rounded-lg px-4 py-2 flex-1"
           value={filter.search} onChange={(e) => setFilter({ ...filter, search: e.target.value })} />
@@ -90,16 +105,17 @@ export default function BarangPage() {
                 <td className={`px-4 py-3 text-right font-bold ${item.stok_sekarang <= item.minimal_stok ? 'text-red-600' : 'text-green-600'}`}>
                   {formatNumber(item.stok_sekarang || 0)}
                 </td>
-                <td className="px-4 py-3 text-right text-sm text-gray-700">{formatNumber(item.minimal_stok)}</td>
+                <td className="px-4 py-3 text-right text-sm text-gray-800">{formatNumber(item.minimal_stok)}</td>
                 <td className="px-4 py-3 text-right">
-                  <button onClick={() => setModal({ open: true, mode: 'edit', data: item })} className="text-blue-600 hover:underline mr-3">Edit</button>
-                  <button onClick={() => handleDelete(item.id)} className="text-red-600 hover:underline">Hapus</button>
+                  <button type="button" onClick={() => handleViewDetail(item)} className="text-green-600 hover:underline mr-3">Detail</button>
+                  <button type="button" onClick={() => setModal({ open: true, mode: 'edit', data: item })} className="text-blue-600 hover:underline mr-3">Edit</button>
+                  <button type="button" onClick={() => handleDelete(item.id)} className="text-red-600 hover:underline">Hapus</button>
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
-        {data.length === 0 && <p className="text-center py-8 text-gray-700">Tidak ada data</p>}
+        {data.length === 0 && <p className="text-center py-8 text-gray-800">Tidak ada data</p>}
       </div>
 
       {modal.open && (
@@ -131,6 +147,52 @@ export default function BarangPage() {
                 <button type="submit" className="px-4 py-2 bg-primary text-white rounded-lg">Simpan</button>
               </div>
             </form>
+          </div>
+        </div>
+      )}
+
+      {detailModal.open && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+          <div className="bg-white rounded-xl p-6 w-full max-w-2xl max-h-[80vh] overflow-y-auto">
+            <div className="flex justify-between items-center mb-4">
+              <h2 className="text-xl font-bold">Detail Batch - {detailModal.barang?.nama}</h2>
+              <button onClick={() => setDetailModal({ open: false, barang: null, batches: [] })} className="text-gray-500 hover:text-gray-700 text-xl">✕</button>
+            </div>
+            <div className="mb-4">
+              <p className="text-sm text-gray-700">Kode: <span className="font-medium">{detailModal.barang?.kode}</span></p>
+              <p className="text-sm text-gray-700">Stok Total: <span className="font-bold text-green-600">{formatNumber(detailModal.barang?.stok_sekarang || 0)} {detailModal.barang?.satuan}</span></p>
+            </div>
+            <table className="w-full">
+              <thead className="bg-slate-700">
+                <tr>
+                  <th className="px-4 py-3 text-left text-sm font-medium text-white">Batch</th>
+                  <th className="px-4 py-3 text-left text-sm font-medium text-white">Tgl Masuk</th>
+                  <th className="px-4 py-3 text-left text-sm font-medium text-white">Tgl Expired</th>
+                  <th className="px-4 py-3 text-right text-sm font-medium text-white">Jumlah Awal</th>
+                  <th className="px-4 py-3 text-right text-sm font-medium text-white">Sisa</th>
+                  <th className="px-4 py-3 text-center text-sm font-medium text-white">Status</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-gray-200">
+                {detailModal.batches.map((batch) => (
+                  <tr key={batch.id} className="hover:bg-orange-100">
+                    <td className="px-4 py-3 text-sm font-mono">{batch.batch_number}</td>
+                    <td className="px-4 py-3 text-sm">{formatDate(batch.tanggal_masuk)}</td>
+                    <td className="px-4 py-3 text-sm">{formatDate(batch.tanggal_kadaluarsa) || '-'}</td>
+                    <td className="px-4 py-3 text-right">{formatNumber(batch.jumlah)}</td>
+                    <td className="px-4 py-3 text-right font-bold">{formatNumber(batch.sisa || 0)}</td>
+                    <td className="px-4 py-3 text-center">
+                      <span className={`px-2 py-1 rounded text-xs font-medium ${getStatusColor(batch)}`}>
+                        {batch.tanggal_kadaluarsa ? (Math.ceil((new Date(batch.tanggal_kadaluarsa) - new Date()) / (1000 * 60 * 60 * 24)) <= 0 ? 'Expired' : Math.ceil((new Date(batch.tanggal_kadaluarsa) - new Date()) / (1000 * 60 * 60 * 24)) + ' hari') : 'Aman'}
+                      </span>
+                    </td>
+                  </tr>
+                ))}
+                {detailModal.batches.length === 0 && (
+                  <tr><td colSpan="6" className="px-4 py-8 text-center text-gray-800">Belum ada batch</td></tr>
+                )}
+              </tbody>
+            </table>
           </div>
         </div>
       )}

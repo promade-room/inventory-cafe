@@ -30,6 +30,7 @@ export default function Layout() {
     { path: '/masuk', label: 'Barang Masuk', icon: '📥' },
     { path: '/keluar', label: 'Barang Keluar', icon: '📤' },
     { path: '/laporan', label: 'Laporan', icon: '📋' },
+    { path: '/settings', label: 'Pengaturan', icon: '⚙️' },
   ];
 
   const isAdmin = user?.role === 'admin';
@@ -54,7 +55,7 @@ export default function Layout() {
 
       {/* Sidebar */}
       <aside className={`
-        fixed lg:static inset-y-0 left-0 z-50 w-64 bg-gradient-to-b from-slate-700 to-slate-800 text-white flex flex-col h-full transform transition-transform duration-300
+        fixed lg:sticky lg:top-0 lg:left-0 z-50 lg:h-screen w-64 bg-gradient-to-b from-slate-700 to-slate-800 text-white flex flex-col h-full transform transition-transform duration-300
         ${sidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
       `}>
         <div className="p-6 border-b border-slate-600 flex items-center justify-between">

@@ -4,18 +4,19 @@ import { formatRupiah, formatDate, formatNumber } from '../utils/format';
 
 export default function LaporanPage() {
   const [activeTab, setActiveTab] = useState('stok');
+  const [filterBulan, setFilterBulan] = useState('');
   const [stok, setStok] = useState([]);
   const [expired, setExpired] = useState([]);
   const [movement, setMovement] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => { loadData(); }, [activeTab]);
+  useEffect(() => { loadData(); }, [activeTab, filterBulan]);
 
   const loadData = async () => {
     setLoading(true);
     try {
       if (activeTab === 'stok') {
-        const { data } = await getLaporanStok();
+        const { data } = await getLaporanStok({ bulan: filterBulan || null });
         setStok(data);
       } else if (activeTab === 'expired') {
         const { data } = await getLaporanExpired();
@@ -31,6 +32,23 @@ export default function LaporanPage() {
   return (
     <div>
       <h1 className="text-2xl font-bold text-gray-800 mb-6">Laporan</h1>
+
+      {/* Filter Bulan */}
+      {activeTab === 'stok' && (
+        <div className="flex items-center gap-4 mb-4">
+          <label className="text-sm text-gray-700">Filter Bulan:</label>
+          <input 
+            type="month" 
+            value={filterBulan}
+            onChange={(e) => setFilterBulan(e.target.value)}
+            className="border rounded-lg px-3 py-2"
+          />
+          {filterBulan && (
+            <button onClick={() => setFilterBulan('')} className="text-sm text-red-600 hover:underline">Reset</button>
+          )}
+        </div>
+      )}
+
 
       {/* Tabs */}
       <div className="flex gap-2 mb-6">
