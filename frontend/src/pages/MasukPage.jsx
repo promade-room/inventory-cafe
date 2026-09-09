@@ -9,6 +9,9 @@ export default function MasukPage() {
   const [loading, setLoading] = useState(true);
   const [modal, setModal] = useState(false);
 
+  const role = JSON.parse(localStorage.getItem('user') || '{}').role;
+  const isAdmin = role === 'admin';
+
   useEffect(() => { loadData(); loadOptions(); }, []);
 
   const loadData = async () => {
@@ -68,7 +71,7 @@ export default function MasukPage() {
               <th className="px-4 py-3 text-right text-sm font-medium text-white">Harga</th>
               <th className="px-4 py-3 text-left text-sm font-medium text-white">Batch</th>
               <th className="px-4 py-3 text-left text-sm font-medium text-white">Exp</th>
-              <th className="px-4 py-3 text-right text-sm font-medium text-white">Aksi</th>
+              {isAdmin && <th className="px-4 py-3 text-right text-sm font-medium text-white">Aksi</th>}
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-200">
@@ -82,9 +85,11 @@ export default function MasukPage() {
                 <td className="px-4 py-3 text-right">{formatRupiah(item.harga_satuan)}</td>
                 <td className="px-4 py-3 text-sm font-mono text-gray-700">{item.batch_number}</td>
                 <td className="px-4 py-3 text-sm">{formatDate(item.tanggal_kadaluarsa)}</td>
-                <td className="px-4 py-3 text-right">
-                  <button onClick={() => handleDelete(item.id)} className="text-red-600 hover:underline">Hapus</button>
-                </td>
+                {isAdmin && (
+                  <td className="px-4 py-3 text-right">
+                    <button onClick={() => handleDelete(item.id)} className="text-red-600 hover:underline">Hapus</button>
+                  </td>
+                )}
               </tr>
             ))}
           </tbody>

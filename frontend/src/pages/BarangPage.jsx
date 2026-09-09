@@ -10,6 +10,9 @@ export default function BarangPage() {
   const [filter, setFilter] = useState({ search: '', kategori_id: '' });
   const [detailModal, setDetailModal] = useState({ open: false, barang: null, batches: [] });
 
+  const role = JSON.parse(localStorage.getItem('user') || '{}').role;
+  const isAdmin = role === 'admin';
+
   useEffect(() => { loadData(); loadKategori(); }, []);
   useEffect(() => { loadData(); }, [filter]);
 
@@ -67,9 +70,11 @@ export default function BarangPage() {
     <div>
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-2xl font-bold text-gray-800">Data Barang</h1>
-        <button onClick={() => setModal({ open: true, mode: 'add', data: null })} className="bg-primary text-white px-4 py-2 rounded-lg hover:bg-amber-700">
-          + Tambah Barang
-        </button>
+        {isAdmin && (
+          <button onClick={() => setModal({ open: true, mode: 'add', data: null })} className="bg-primary text-white px-4 py-2 rounded-lg hover:bg-amber-700">
+            + Tambah Barang
+          </button>
+        )}
       </div>
 
       <div className="flex gap-4 mb-6">
@@ -108,8 +113,12 @@ export default function BarangPage() {
                 <td className="px-4 py-3 text-right text-sm text-gray-800">{formatNumber(item.minimal_stok)}</td>
                 <td className="px-4 py-3 text-right">
                   <button type="button" onClick={() => handleViewDetail(item)} className="text-green-600 hover:underline mr-3">Detail</button>
-                  <button type="button" onClick={() => setModal({ open: true, mode: 'edit', data: item })} className="text-blue-600 hover:underline mr-3">Edit</button>
-                  <button type="button" onClick={() => handleDelete(item.id)} className="text-red-600 hover:underline">Hapus</button>
+                  {isAdmin && (
+                    <>
+                      <button type="button" onClick={() => setModal({ open: true, mode: 'edit', data: item })} className="text-blue-600 hover:underline mr-3">Edit</button>
+                      <button type="button" onClick={() => handleDelete(item.id)} className="text-red-600 hover:underline">Hapus</button>
+                    </>
+                  )}
                 </td>
               </tr>
             ))}

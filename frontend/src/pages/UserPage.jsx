@@ -6,6 +6,9 @@ export default function UserPage() {
   const [loading, setLoading] = useState(true);
   const [modal, setModal] = useState({ open: false, mode: 'add', data: null });
 
+  const role = JSON.parse(localStorage.getItem('user') || '{}').role;
+  const isAdmin = role === 'admin';
+
   useEffect(() => { loadData(); }, []);
 
   const loadData = async () => {
@@ -38,9 +41,11 @@ export default function UserPage() {
     <div>
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-2xl font-bold text-gray-800">Manajemen User</h1>
-        <button onClick={() => setModal({ open: true, mode: 'add', data: null })} className="bg-primary text-white px-4 py-2 rounded-lg hover:bg-amber-700">
-          + Tambah User
-        </button>
+        {isAdmin && (
+          <button onClick={() => setModal({ open: true, mode: 'add', data: null })} className="bg-primary text-white px-4 py-2 rounded-lg hover:bg-amber-700">
+            + Tambah User
+          </button>
+        )}
       </div>
 
       <div className="bg-white rounded-xl shadow-sm overflow-hidden">
@@ -52,7 +57,7 @@ export default function UserPage() {
               <th className="px-6 py-3 text-left text-sm font-medium text-white">Nama Lengkap</th>
               <th className="px-6 py-3 text-left text-sm font-medium text-white">Role</th>
               <th className="px-6 py-3 text-left text-sm font-medium text-white">Dibuat</th>
-              <th className="px-6 py-3 text-right text-sm font-medium text-white">Aksi</th>
+              {isAdmin && <th className="px-6 py-3 text-right text-sm font-medium text-white">Aksi</th>}
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-200">
@@ -71,10 +76,12 @@ export default function UserPage() {
                   </span>
                 </td>
                 <td className="px-6 py-4 text-sm text-gray-700">{item.created_at?.slice(0,10)}</td>
-                <td className="px-6 py-4 text-right">
-                  <button onClick={() => setModal({ open: true, mode: 'edit', data: item })} className="text-blue-600 hover:underline mr-3">Edit</button>
-                  <button onClick={() => handleDelete(item.id)} className="text-red-600 hover:underline">Hapus</button>
-                </td>
+                {isAdmin && (
+                  <td className="px-6 py-4 text-right">
+                    <button onClick={() => setModal({ open: true, mode: 'edit', data: item })} className="text-blue-600 hover:underline mr-3">Edit</button>
+                    <button onClick={() => handleDelete(item.id)} className="text-red-600 hover:underline">Hapus</button>
+                  </td>
+                )}
               </tr>
             ))}
           </tbody>

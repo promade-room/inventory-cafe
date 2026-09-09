@@ -6,6 +6,9 @@ export default function SupplierPage() {
   const [loading, setLoading] = useState(true);
   const [modal, setModal] = useState({ open: false, mode: 'add', data: null });
 
+  const role = JSON.parse(localStorage.getItem('user') || '{}').role;
+  const isAdmin = role === 'admin';
+
   useEffect(() => { loadData(); }, []);
 
   const loadData = async () => {
@@ -38,9 +41,11 @@ export default function SupplierPage() {
     <div>
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-2xl font-bold text-gray-800">Supplier</h1>
-        <button onClick={() => setModal({ open: true, mode: 'add', data: null })} className="bg-primary text-white px-4 py-2 rounded-lg hover:bg-amber-700">
-          + Tambah Supplier
-        </button>
+        {isAdmin && (
+          <button onClick={() => setModal({ open: true, mode: 'add', data: null })} className="bg-primary text-white px-4 py-2 rounded-lg hover:bg-amber-700">
+            + Tambah Supplier
+          </button>
+        )}
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -51,10 +56,12 @@ export default function SupplierPage() {
             <p className="text-sm text-gray-700">📞 {item.telepon || '-'}</p>
             <p className="text-sm text-gray-700">✉️ {item.email || '-'}</p>
             {item.catatan && <p className="text-sm text-gray-400 mt-2 italic">"{item.catatan}"</p>}
-            <div className="flex gap-2 mt-4 pt-4 border-t">
-              <button onClick={() => setModal({ open: true, mode: 'edit', data: item })} className="flex-1 text-blue-600 py-2 rounded border hover:bg-blue-50">Edit</button>
-              <button onClick={() => handleDelete(item.id)} className="flex-1 text-red-600 py-2 rounded border hover:bg-red-50">Hapus</button>
-            </div>
+            {isAdmin && (
+              <div className="flex gap-2 mt-4 pt-4 border-t">
+                <button onClick={() => setModal({ open: true, mode: 'edit', data: item })} className="flex-1 text-blue-600 py-2 rounded border hover:bg-blue-50">Edit</button>
+                <button onClick={() => handleDelete(item.id)} className="flex-1 text-red-600 py-2 rounded border hover:bg-red-50">Hapus</button>
+              </div>
+            )}
           </div>
         ))}
         {data.length === 0 && <p className="text-gray-700 col-span-full text-center py-8">Tidak ada data</p>}
