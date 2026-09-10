@@ -7,7 +7,7 @@ export default function KategoriPage() {
   const [modal, setModal] = useState({ open: false, mode: 'add', data: null });
 
   const role = JSON.parse(localStorage.getItem('user') || '{}').role;
-  const isAdmin = role === 'admin';
+  const canManage = role === 'admin' || role === 'staff';
 
   useEffect(() => { loadData(); }, []);
 
@@ -43,7 +43,7 @@ export default function KategoriPage() {
     <div>
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-2xl font-bold text-gray-800">Kategori Barang</h1>
-        {isAdmin && (
+        {canManage && (
           <button onClick={() => setModal({ open: true, mode: 'add', data: null })} className="bg-primary text-white px-4 py-2 rounded-lg hover:bg-amber-700">
             + Tambah Kategori
           </button>
@@ -58,7 +58,7 @@ export default function KategoriPage() {
               <th className="px-6 py-3 text-left text-sm font-medium text-white">Nama</th>
               <th className="px-6 py-3 text-left text-sm font-medium text-white">Icon</th>
               <th className="px-6 py-3 text-left text-sm font-medium text-white">Warna</th>
-              {isAdmin && <th className="px-6 py-3 text-right text-sm font-medium text-white">Aksi</th>}
+              {canManage && <th className="px-6 py-3 text-right text-sm font-medium text-white">Aksi</th>}
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-200">
@@ -70,7 +70,7 @@ export default function KategoriPage() {
                 <td className="px-6 py-4">
                   <span className="inline-block w-6 h-6 rounded" style={{ backgroundColor: item.color || '#ccc' }}></span>
                 </td>
-                {isAdmin && (
+                {canManage && (
                   <td className="px-6 py-4 text-right">
                     <button onClick={() => setModal({ open: true, mode: 'edit', data: item })} className="text-blue-600 hover:underline mr-3">Edit</button>
                     <button onClick={() => handleDelete(item.id)} className="text-red-600 hover:underline">Hapus</button>

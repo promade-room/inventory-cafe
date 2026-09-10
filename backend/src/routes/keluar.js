@@ -98,7 +98,7 @@ router.post('/', auth, authorize('admin', 'staff'), async (req, res) => {
 });
 
 // DELETE barang keluar
-router.delete('/:id', auth, authorize('admin'), async (req, res) => {
+router.delete('/:id', auth, authorize('admin', 'staff'), async (req, res) => {
   try {
     // Delete FIFO transactions first
     await db.query('DELETE FROM fifo_transactions WHERE barang_keluar_id = ?', [req.params.id]);

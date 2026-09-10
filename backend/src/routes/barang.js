@@ -104,7 +104,7 @@ router.put('/:id', auth, authorize('admin', 'staff'), async (req, res) => {
 });
 
 // DELETE barang
-router.delete('/:id', auth, authorize('admin'), async (req, res) => {
+router.delete('/:id', auth, authorize('admin', 'staff'), async (req, res) => {
   try {
     await db.query('DELETE FROM barangs WHERE id = ?', [req.params.id]);
     res.json({ message: 'Barang berhasil dihapus' });

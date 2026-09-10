@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import AutoUpdateChecker from './components/AutoUpdateChecker';
 import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
 import Layout from './components/Layout';
@@ -19,6 +20,7 @@ function PrivateRoute({ children }) {
 function App() {
   return (
     <Router>
+      <AutoUpdateChecker />
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/" element={

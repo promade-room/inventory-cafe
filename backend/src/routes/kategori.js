@@ -12,7 +12,7 @@ router.get('/', auth, async (req, res) => {
   }
 });
 
-router.post('/', auth, authorize('admin'), async (req, res) => {
+router.post('/', auth, authorize('admin', 'staff'), async (req, res) => {
   try {
     const { nama, icon, color } = req.body;
     if (!nama) return res.status(400).json({ message: 'Nama wajib diisi' });
@@ -24,7 +24,7 @@ router.post('/', auth, authorize('admin'), async (req, res) => {
   }
 });
 
-router.put('/:id', auth, authorize('admin'), async (req, res) => {
+router.put('/:id', auth, authorize('admin', 'staff'), async (req, res) => {
   try {
     const { nama, icon, color } = req.body;
     await db.query('UPDATE kategoris SET nama = ?, icon = ?, color = ? WHERE id = ?', [nama, icon, color, req.params.id]);
@@ -34,7 +34,7 @@ router.put('/:id', auth, authorize('admin'), async (req, res) => {
   }
 });
 
-router.delete('/:id', auth, authorize('admin'), async (req, res) => {
+router.delete('/:id', auth, authorize('admin', 'staff'), async (req, res) => {
   try {
     await db.query('DELETE FROM kategoris WHERE id = ?', [req.params.id]);
     res.json({ message: 'Kategori berhasil dihapus' });

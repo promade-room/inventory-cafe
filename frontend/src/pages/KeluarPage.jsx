@@ -9,7 +9,7 @@ export default function KeluarPage() {
   const [modal, setModal] = useState(false);
 
   const role = JSON.parse(localStorage.getItem('user') || '{}').role;
-  const isAdmin = role === 'admin';
+  const canManage = role === 'admin' || role === 'staff';
 
   useEffect(() => { loadData(); loadBarangs(); }, []);
 
@@ -64,7 +64,7 @@ export default function KeluarPage() {
               <th className="px-4 py-3 text-right text-sm font-medium text-white">Jumlah</th>
               <th className="px-4 py-3 text-left text-sm font-medium text-white">Keterangan</th>
               <th className="px-4 py-3 text-left text-sm font-medium text-white">User</th>
-              {isAdmin && <th className="px-4 py-3 text-right text-sm font-medium text-white">Aksi</th>}
+              {canManage && <th className="px-4 py-3 text-right text-sm font-medium text-white">Aksi</th>}
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-200">
@@ -76,7 +76,7 @@ export default function KeluarPage() {
                 <td className="px-4 py-3 text-right font-medium">{formatNumber(item.jumlah)}</td>
                 <td className="px-4 py-3 text-sm">{item.keterangan || '-'}</td>
                 <td className="px-4 py-3 text-sm text-gray-700">{item.user_nama}</td>
-                {isAdmin && (
+                {canManage && (
                   <td className="px-4 py-3 text-right">
                     <button onClick={() => handleDelete(item.id)} className="text-red-600 hover:underline">Hapus</button>
                   </td>

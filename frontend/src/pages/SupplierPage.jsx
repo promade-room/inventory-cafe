@@ -7,7 +7,7 @@ export default function SupplierPage() {
   const [modal, setModal] = useState({ open: false, mode: 'add', data: null });
 
   const role = JSON.parse(localStorage.getItem('user') || '{}').role;
-  const isAdmin = role === 'admin';
+  const canManage = role === 'admin' || role === 'staff';
 
   useEffect(() => { loadData(); }, []);
 
@@ -41,7 +41,7 @@ export default function SupplierPage() {
     <div>
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-2xl font-bold text-gray-800">Supplier</h1>
-        {isAdmin && (
+        {canManage && (
           <button onClick={() => setModal({ open: true, mode: 'add', data: null })} className="bg-primary text-white px-4 py-2 rounded-lg hover:bg-amber-700">
             + Tambah Supplier
           </button>
@@ -56,7 +56,7 @@ export default function SupplierPage() {
             <p className="text-sm text-gray-700">📞 {item.telepon || '-'}</p>
             <p className="text-sm text-gray-700">✉️ {item.email || '-'}</p>
             {item.catatan && <p className="text-sm text-gray-400 mt-2 italic">"{item.catatan}"</p>}
-            {isAdmin && (
+            {canManage && (
               <div className="flex gap-2 mt-4 pt-4 border-t">
                 <button onClick={() => setModal({ open: true, mode: 'edit', data: item })} className="flex-1 text-blue-600 py-2 rounded border hover:bg-blue-50">Edit</button>
                 <button onClick={() => handleDelete(item.id)} className="flex-1 text-red-600 py-2 rounded border hover:bg-red-50">Hapus</button>

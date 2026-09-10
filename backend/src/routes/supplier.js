@@ -40,7 +40,7 @@ router.put('/:id', auth, authorize('admin', 'staff'), async (req, res) => {
   }
 });
 
-router.delete('/:id', auth, authorize('admin'), async (req, res) => {
+router.delete('/:id', auth, authorize('admin', 'staff'), async (req, res) => {
   try {
     await db.query('DELETE FROM suppliers WHERE id = ?', [req.params.id]);
     res.json({ message: 'Supplier berhasil dihapus' });

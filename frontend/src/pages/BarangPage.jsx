@@ -11,7 +11,7 @@ export default function BarangPage() {
   const [detailModal, setDetailModal] = useState({ open: false, barang: null, batches: [] });
 
   const role = JSON.parse(localStorage.getItem('user') || '{}').role;
-  const isAdmin = role === 'admin';
+  const canManage = role === 'admin' || role === 'staff';
 
   useEffect(() => { loadData(); loadKategori(); }, []);
   useEffect(() => { loadData(); }, [filter]);
@@ -70,7 +70,7 @@ export default function BarangPage() {
     <div>
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-2xl font-bold text-gray-800">Data Barang</h1>
-        {isAdmin && (
+        {canManage && (
           <button onClick={() => setModal({ open: true, mode: 'add', data: null })} className="bg-primary text-white px-4 py-2 rounded-lg hover:bg-amber-700">
             + Tambah Barang
           </button>
@@ -113,7 +113,7 @@ export default function BarangPage() {
                 <td className="px-4 py-3 text-right text-sm text-gray-800">{formatNumber(item.minimal_stok)}</td>
                 <td className="px-4 py-3 text-right">
                   <button type="button" onClick={() => handleViewDetail(item)} className="text-green-600 hover:underline mr-3">Detail</button>
-                  {isAdmin && (
+                  {canManage && (
                     <>
                       <button type="button" onClick={() => setModal({ open: true, mode: 'edit', data: item })} className="text-blue-600 hover:underline mr-3">Edit</button>
                       <button type="button" onClick={() => handleDelete(item.id)} className="text-red-600 hover:underline">Hapus</button>

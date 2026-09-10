@@ -38,7 +38,7 @@ router.get('/', auth, async (req, res) => {
       params.push(barang_id);
     }
 
-    query += ' ORDER BY bm.tanggal_masuk DESC, bm.id DESC';
+    query += ' ORDER BY CASE WHEN bm.tanggal_kadaluarsa IS NULL THEN 1 ELSE 0 END ASC, bm.tanggal_kadaluarsa ASC, bm.tanggal_masuk DESC';
     const [rows] = await db.query(query, params);
     res.json(rows);
   } catch (err) {
@@ -70,7 +70,7 @@ router.post('/', auth, authorize('admin', 'staff'), async (req, res) => {
 });
 
 // DELETE barang masuk
-router.delete('/:id', auth, authorize('admin'), async (req, res) => {
+router.delete('/:id', auth, authorize('admin', 'staff'), async (req, res) => {
   try {
     // Check if sudah ada transaksi FIFO
     const [check] = await db.query(
