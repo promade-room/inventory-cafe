@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { getMasuk, getBarangs, getSuppliers, createMasuk, deleteMasuk } from '../services/api';
 import { formatRupiah, formatDate, formatNumber } from '../utils/format';
+import SearchableSelect from '../components/SearchableSelect';
 
 export default function MasukPage() {
   const [data, setData] = useState([]);
@@ -8,6 +9,8 @@ export default function MasukPage() {
   const [suppliers, setSuppliers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [modal, setModal] = useState(false);
+  const [selectedBarang, setSelectedBarang] = useState('');
+  const [selectedSupplier, setSelectedSupplier] = useState('');
 
   const role = JSON.parse(localStorage.getItem('user') || '{}').role;
   const canManage = role === 'admin' || role === 'staff';
@@ -31,13 +34,15 @@ export default function MasukPage() {
     e.preventDefault();
     const formData = new FormData(e.target);
     const payload = Object.fromEntries(formData);
-    payload.barang_id = parseInt(payload.barang_id);
-    payload.supplier_id = payload.supplier_id ? parseInt(payload.supplier_id) : null;
+    payload.barang_id = parseInt(selectedBarang);
+    payload.supplier_id = selectedSupplier ? parseInt(selectedSupplier) : null;
     payload.jumlah = parseInt(payload.jumlah);
     payload.harga_satuan = parseFloat(payload.harga_satuan);
     try {
       await createMasuk(payload);
       setModal(false);
+      setSelectedBarang('');
+      setSelectedSupplier('');
       loadData();
     } catch (err) { alert(err.response?.data?.message || 'Error'); }
   };
@@ -103,15 +108,22 @@ export default function MasukPage() {
             <h2 className="text-xl font-bold mb-4">Tambah Barang Masuk</h2>
             <form onSubmit={handleSubmit}>
               <div className="mb-3"><label className="block text-sm font-medium mb-1">Barang</label>
-                <select name="barang_id" className="w-full border rounded-lg px-3 py-2" required>
-                  <option value="">Pilih Barang</option>
-                  {barangs.map(b => <option key={b.id} value={b.id}>{b.kode} - {b.nama}</option>)}
-                </select></div>
+                <SearchableSelect
+                  name="barang_id"
+                  options={barangs.map(b => ({ value: b.id, label: `${b.kode} - ${b.nama}` }))}
+                  value={selectedBarang}
+                  onChange={setSelectedBarang}
+                  placeholder="Cari & pilih barang..."
+                  required
+                /></div>
               <div className="mb-3"><label className="block text-sm font-medium mb-1">Supplier</label>
-                <select name="supplier_id" className="w-full border rounded-lg px-3 py-2">
-                  <option value="">Pilih Supplier</option>
-                  {suppliers.map(s => <option key={s.id} value={s.id}>{s.nama}</option>)}
-                </select></div>
+                <SearchableSelect
+                  name="supplier_id"
+                  options={suppliers.map(s => ({ value: s.id, label: s.nama }))}
+                  value={selectedSupplier}
+                  onChange={setSelectedSupplier}
+                  placeholder="Cari & pilih supplier..."
+                /></div>
               <div className="mb-3"><label className="block text-sm font-medium mb-1">Jumlah</label>
                 <input type="number" name="jumlah" className="w-full border rounded-lg px-3 py-2" required /></div>
               <div className="mb-3"><label className="block text-sm font-medium mb-1">Harga Satuan</label>

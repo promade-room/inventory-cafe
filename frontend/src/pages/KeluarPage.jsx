@@ -1,12 +1,14 @@
 import { useState, useEffect } from 'react';
 import { getKeluar, getBarangs, createKeluar, deleteKeluar } from '../services/api';
 import { formatDate, formatNumber } from '../utils/format';
+import SearchableSelect from '../components/SearchableSelect';
 
 export default function KeluarPage() {
   const [data, setData] = useState([]);
   const [barangs, setBarangs] = useState([]);
   const [loading, setLoading] = useState(true);
   const [modal, setModal] = useState(false);
+  const [selectedBarang, setSelectedBarang] = useState('');
 
   const role = JSON.parse(localStorage.getItem('user') || '{}').role;
   const canManage = role === 'admin' || role === 'staff';
@@ -28,11 +30,12 @@ export default function KeluarPage() {
     e.preventDefault();
     const formData = new FormData(e.target);
     const payload = Object.fromEntries(formData);
-    payload.barang_id = parseInt(payload.barang_id);
+    payload.barang_id = parseInt(selectedBarang);
     payload.jumlah = parseInt(payload.jumlah);
     try {
       await createKeluar(payload);
       setModal(false);
+      setSelectedBarang('');
       loadData();
     } catch (err) { alert(err.response?.data?.message || 'Error'); }
   };
@@ -94,10 +97,14 @@ export default function KeluarPage() {
             <h2 className="text-xl font-bold mb-4">Tambah Barang Keluar (FIFO)</h2>
             <form onSubmit={handleSubmit}>
               <div className="mb-3"><label className="block text-sm font-medium mb-1">Barang</label>
-                <select name="barang_id" className="w-full border rounded-lg px-3 py-2" required onChange={() => {}}>
-                  <option value="">Pilih Barang</option>
-                  {barangs.map(b => <option key={b.id} value={b.id}>{b.kode} - {b.nama} (Stok: {b.stok_sekarang || 0})</option>)}
-                </select></div>
+                <SearchableSelect
+                  name="barang_id"
+                  options={barangs.map(b => ({ value: b.id, label: `${b.kode} - ${b.nama} (Stok: ${b.stok_sekarang || 0})` }))}
+                  value={selectedBarang}
+                  onChange={setSelectedBarang}
+                  placeholder="Cari & pilih barang..."
+                  required
+                /></div>
               <div className="mb-3"><label className="block text-sm font-medium mb-1">Jumlah</label>
                 <input type="number" name="jumlah" className="w-full border rounded-lg px-3 py-2" required /></div>
               <div className="mb-3"><label className="block text-sm font-medium mb-1">Tanggal Keluar</label>
