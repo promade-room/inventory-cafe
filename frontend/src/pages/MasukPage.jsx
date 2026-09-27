@@ -73,7 +73,7 @@ export default function MasukPage() {
               <th className="px-4 py-3 text-left text-sm font-medium text-white">Barang</th>
               <th className="px-4 py-3 text-left text-sm font-medium text-white">Supplier</th>
               <th className="px-4 py-3 text-right text-sm font-medium text-white">Jumlah</th>
-              <th className="px-4 py-3 text-right text-sm font-medium text-white">Harga</th>
+              <th className="px-4 py-3 text-right text-sm font-medium text-white">Harga (Rp)</th>
               <th className="px-4 py-3 text-left text-sm font-medium text-white">Batch</th>
               <th className="px-4 py-3 text-left text-sm font-medium text-white">Exp</th>
               {canManage && <th className="px-4 py-3 text-right text-sm font-medium text-white">Aksi</th>}

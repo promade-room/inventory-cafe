@@ -1,11 +1,23 @@
 // Indonesian formatting utilities
 
+// export const formatRupiah = (amount) => {
+//   if (amount === null || amount === undefined) return 'Rp 0';
+//   const num = parseFloat(amount);
+//   if (isNaN(num)) return 'Rp 0';
+//   return new Intl.NumberFormat('id-ID', {
+//     style: 'currency',
+//     currency: 'IDR',
+//     minimumFractionDigits: 0,
+//     maximumFractionDigits: 0
+//   }).format(num);
+// };
+
 export const formatRupiah = (amount) => {
-  if (amount === null || amount === undefined) return 'Rp 0';
+  if (amount === null || amount === undefined) return '0';
   const num = parseFloat(amount);
-  if (isNaN(num)) return 'Rp 0';
+  if (isNaN(num)) return '0';
   return new Intl.NumberFormat('id-ID', {
-    style: 'currency',
+    style: 'decimal',
     currency: 'IDR',
     minimumFractionDigits: 0,
     maximumFractionDigits: 0
